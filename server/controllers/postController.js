@@ -19,11 +19,16 @@ class PostController {
     }
   }
   async getAll(req, res) {
-     const posts = await Post.findAll();
+     let {limit, page} = req.query;
+     page = page || 1;
+     limit = limit || 9;
+     const offset = page * limit - limit;
+     const posts = await Post.findAndCountAll({limit, offset});
      return res.json(posts);
   }
   async getOne(req, res) {
-
+     const {id} = req.params;
+     const post = await Post.findOne({ where: {id} });
   }
 }
 
