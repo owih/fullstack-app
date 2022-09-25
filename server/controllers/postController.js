@@ -29,6 +29,7 @@ class PostController {
   async getOne(req, res) {
      const {id} = req.params;
      const post = await Post.findOne({ where: {id} });
+     return res.json(post);
   }
 }
 
