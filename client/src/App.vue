@@ -1,18 +1,20 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/auth">Auth</router-link> |
-    <router-link to="/registration">Registration</router-link>
-  </nav>
-  <router-view/>
+  <HeaderVue />
+  <main class="main">
+    <router-view/>
+  </main>
 </template>
 
 <script>
 import { check } from "@/http/userAPI";
+import HeaderVue from '@/components/HeaderVue/HeaderVue';
 import { mapMutations } from "vuex";
 
 export default {
   name: 'App',
+  components: {
+    HeaderVue,
+  },
   beforeCreate () {
     check().then((data) => {
       this.setUserState(data);
@@ -33,11 +35,9 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  //font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
-  color: #2c3e50;
+  height: 100%;
 }
 
 nav {

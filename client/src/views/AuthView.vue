@@ -22,6 +22,7 @@
 <script>
 import { mapMutations } from 'vuex';
 import { login, registration } from "@/http/userAPI";
+import { REGISTRATION_ROUT } from "@/routes";
 
 export default {
   name: 'AuthView',
@@ -41,7 +42,7 @@ export default {
       "setUserAuth", "setUser"
     ]),
     isRegistrationCheck () {
-      if (location.pathname.includes('registration')) this.isRegistration = true;
+      if (location.pathname === REGISTRATION_ROUT) this.isRegistration = true;
     },
     async loginProcess () {
       try {
