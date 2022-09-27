@@ -9,8 +9,8 @@
             </div>
           </div>
           <div class="header__search-wrapper">
-            <input id="header-search" class="header__search" type="text">
-            <label for="header-search">Search</label>
+            <input id="header-search" required class="header__search-input" type="text">
+            <label for="header-search" class="header__search-label">Search</label>
           </div>
           <div class="header__navbar">
             <NavbarVue :navbarData="navbarData"/>
@@ -23,7 +23,7 @@
 
 <script>
 import NavbarVue from "@/components/HeaderVue/NavbarVue";
-import { PROFILE_ROUT } from "@/routes";
+import { AUTH_ROUT, PROFILE_ROUT } from "@/routes";
 
 export default {
   name: "HeaderVue",
@@ -38,7 +38,8 @@ export default {
         {
           icon: 'bubbles',
           link: PROFILE_ROUT,
-          name: 'messenger'
+          name: 'messenger',
+          authorized: true,
         },
         {
           icon: 'fire',
@@ -48,11 +49,12 @@ export default {
         {
           icon: 'home',
           link: PROFILE_ROUT,
-          name: 'favorites'
+          name: 'favorites',
+          authorized: true,
         },
         {
           icon: 'user',
-          link: PROFILE_ROUT,
+          link: AUTH_ROUT,
           name: 'profile'
         },
       ]
@@ -65,6 +67,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../assets/styles/variables";
   .header {
     padding: 16px 0;
     border-bottom: 1px solid #e6e6e6;
@@ -80,6 +83,30 @@ export default {
     }
     &__logo {
       font-size: 24px;
+    }
+    &__search-wrapper {
+      position: relative;
+    }
+    &__search-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 13px;
+      color: $gray-700;
+    }
+    &__search-input {
+      outline: none;
+      border: 1px solid $gray-500;
+      border-radius: 3px;
+      background-color: $gray-100;
+      font-size: 14px;
+      padding: 4px 12px;
+      color: $gray-800;
+    }
+    &__search-input:focus + &__search-label,
+    &__search-input:valid + &__search-label, {
+      display: none;
     }
   }
 </style>

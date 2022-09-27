@@ -80,12 +80,12 @@ $headings-line-height: 1.25      ;
 $headings-font-weight: 700      ;
 $headings-margin-bottom: 16px   ;
 $headings-margin-top: 4px   ;
-$headings-font-family: 'ActayBold', 'sans-serif';
+$headings-font-family: $font-family-roboto;
 
 // <- Настройки шрифта
 
 // Transition
-$transition-base:            all .2s ease-in-out;
+$transition-base:            color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
 $transition-timeout:              opacity .2s ease-in-out, transform .2s ease-in-out;
 $transition-timeout-sm:           opacity .2s ease-in-out 0.3s, transform .2s ease-in-out 0.3s;
 $transition-timeout-md:           opacity .2s ease-in-out 1s, transform .2s ease-in-out 1s;

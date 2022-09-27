@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {User, Profile} = require('../models/models');
 
-const generateJwt = (id, email, role) => {
+const generateJwt = (id, email, role, login) => {
    return jwt.sign(
-      {id, email, role},
+      {id, email, role, login},
       process.env.SECRET_KEY,
       {expiresIn: '24h'},
    )
@@ -13,15 +13,20 @@ const generateJwt = (id, email, role) => {
 
 class UserController {
   async registration(req, res, next) {
-     const {email, password, role} = req.body;
-     if (!email || !password) return next(ApiError.badRequest('Incorrect email or password'));
-     const candidate = await User.findOne({ where: {email} });
-     if (candidate) return next(ApiError.badRequest('This email already exist'));
+     const {email, password, role, login} = req.body;
+     console.log(req.body)
+     console.log(email)
+     console.log(password)
+     console.log(login)
+     if (!email || !password || !login) return next(ApiError.badRequest('Incorrect email or password'));
+     const checkEmail = await User.findOne({ where: {email} });
+     const checkLogin = await User.findOne({ where: {login} });
+     if (checkEmail || checkLogin) return next(ApiError.badRequest('This email already exist'));
 
      const hashPassword = await bcrypt.hash(password, 3);
-     const user = await User.create({email, role, password: hashPassword});
+     const user = await User.create({email, role, login, password: hashPassword});
      const profile = await Profile.create({userId: user.id});
-     const token = generateJwt(user.id, user.email, user.role);
+     const token = generateJwt(user.id, user.email, user.role, user.login);
      return res.json({ token });
   }
   async login(req, res, next) {
