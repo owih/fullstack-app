@@ -11,7 +11,7 @@ const User = sequelize.define('users', {
 
 const Profile = sequelize.define('profile', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  img: {type: DataTypes.STRING, allowNull: false},
+  img: {type: DataTypes.STRING},
 });
 
 const ProfilePost = sequelize.define('profile_post', {

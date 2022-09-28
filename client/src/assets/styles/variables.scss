@@ -38,17 +38,19 @@ $black: #000      ;
 
 
 $blue: #2980b9   ;
-$indigo: #9b59b6 ;
-$purple: #8e44ad ;
+$indigo: #C13584 ;
+$purple: #5851DB ;
 $pink: #e83e8c   ;
-$red: #c0392b    ;
-$orange: #f39c12 ;
-$yellow: #f1c40f ;
+$red: #FD1D1D    ;
+$orange: #F77737 ;
+$yellow: #FCAF45 ;
+$lightyellow: #FFDC80 ;
 $green: #27ae60  ;
 $teal: #16a085   ;
 $cyan: #1abc9c   ;
+$blue: #3897f0;
 
-$primary:       $orange  ;
+$primary:       $blue  ;
 $secondary:     $cyan    ;
 $success:       $green   ;
 $warning:       $orange  ;
@@ -64,7 +66,7 @@ $lightgray:     $gray-100;
 $font-family-sans-serif: "PT Sans", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 $font-family-roboto: Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 
-$font-size-base:              18px;
+$font-size-base:              14px;
 $font-size-lg:                $font-size-base * 1.25 !default;
 $font-size-sm:                $font-size-base * .875 !default;
 $line-height-base:            1.5;
@@ -85,7 +87,7 @@ $headings-font-family: $font-family-roboto;
 // <- Настройки шрифта
 
 // Transition
-$transition-base:            color .2s ease-in-out, background-color .2s ease-in-out, border-color .2s ease-in-out;
+$transition-base:            color .2s ease-in-out, background-color .15s ease-in-out, border-color .2s ease-in-out;
 $transition-timeout:              opacity .2s ease-in-out, transform .2s ease-in-out;
 $transition-timeout-sm:           opacity .2s ease-in-out 0.3s, transform .2s ease-in-out 0.3s;
 $transition-timeout-md:           opacity .2s ease-in-out 1s, transform .2s ease-in-out 1s;

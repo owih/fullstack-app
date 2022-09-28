@@ -13,7 +13,7 @@
             <label for="header-search" class="header__search-label">Search</label>
           </div>
           <div class="header__navbar">
-            <NavbarVue :navbarData="navbarData"/>
+            <NavbarVue :navbarData="navbarData" :navbarDataAuth="navbarDataAuth"/>
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@ export default {
   name: "HeaderVue",
   data () {
     return {
-      navbarData: [
+      navbarDataAuth: [
         {
           icon: 'home',
           link: '/',
@@ -51,6 +51,23 @@ export default {
           link: PROFILE_ROUT,
           name: 'favorites',
           authorized: true,
+        },
+        {
+          icon: 'user',
+          link: PROFILE_ROUT,
+          name: 'profile'
+        },
+      ],
+      navbarData: [
+        {
+          icon: 'home',
+          link: '/',
+          name: 'home'
+        },
+        {
+          icon: 'fire',
+          link: PROFILE_ROUT,
+          name: 'recommendations'
         },
         {
           icon: 'user',

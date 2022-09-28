@@ -1,67 +1,43 @@
 <template>
   <h1>
-    {{ isRegistration === '/registration'
-    ? 'Registration'
-    : 'Authorization' }}
+    {{ isRegistration ? registrationText : authorizationText }}
   </h1>
-  <label for="">
-    email
-    <input v-model="email" type="text">
-  </label>
-  <br>
-  <label for="">
-    login
-    <input v-model="login" type="text">
-  </label>
-  <br>
-  <label for="">
-    password
-    <input v-model="password" type="password">
-  </label>
-  <br>
-  <button @click="loginProcess">
-    {{ isRegistration === '/registration'
-    ? 'Registration'
-    : 'Login' }}
-  </button>
-  <button @click="switchRoute">
-    {{ isRegistration === '/registration'
-    ? 'Go to authorization'
-    : 'Go to registration' }}
-  </button>
-  <div>
-
+  <div class="authorization-wrapper">
+    <AuthorizationPanel :isRegistration="isRegistration" @switchRoute="switchRoute" @sendData="sendData"/>
   </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex';
-import { login, registration } from "@/http/userAPI";
+import { userLogin, userRegistration } from "@/http/userAPI";
 import { AUTH_ROUT, REGISTRATION_ROUT } from "@/routes";
+import AuthorizationPanel from "@/components/AuthorizationPanel/AuthorizationPanel";
 
 export default {
   name: 'AuthView',
   data () {
     return {
-      email: '',
-      login: '',
-      password: '',
-      isRegistration: window.location.pathname,
+      registrationText: 'Registration',
+      authorizationText: 'Authorization',
+      isRegistration: window.location.pathname === REGISTRATION_ROUT,
     }
+  },
+  components: {
+    AuthorizationPanel,
   },
   methods: {
     ...mapMutations([
       "setUserAuth", "setUser"
     ]),
-    async loginProcess () {
+    async sendData (email, password, login) {
       try {
         let user;
-        if (this.isRegistration === REGISTRATION_ROUT) {
-          user = await registration(this.email, this.login, this.password);
+        console.log(email, password, login)
+        if (this.isRegistration) {
+          user = await userRegistration(email, password, login);
         } else {
-          user = await login(this.email, this.login, this.password);
+          user = await userLogin(email, password);
         }
-        console.log(user)
         this.setUser(user);
         this.setUserAuth();
         this.$router.push('/')
@@ -70,19 +46,22 @@ export default {
       }
     },
     switchRoute () {
-      console.log(this.isRegistration)
-      if (this.isRegistration === REGISTRATION_ROUT) {
+      if (this.isRegistration) {
         window.history.pushState({}, '', AUTH_ROUT);
-        this.isRegistration = AUTH_ROUT;
-      } else if (this.isRegistration === AUTH_ROUT) {
+        this.isRegistration = false;
+      } else {
         window.history.pushState({}, '', REGISTRATION_ROUT);
-        this.isRegistration = REGISTRATION_ROUT;
+        this.isRegistration = true;
       }
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+@import "../assets/styles/mixins";
+  .authorization-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 </style>

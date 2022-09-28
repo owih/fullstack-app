@@ -18,7 +18,7 @@ module.exports = {
       "single"
     ],
     "extends": "off",
-    "semi": [1, "always"],
+    "semi": "off",
     "comma-dangle": "off",
   }
 }

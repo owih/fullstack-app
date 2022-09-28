@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { check } from "@/http/userAPI";
+import { userCheck } from "@/http/userAPI";
 import HeaderVue from '@/components/HeaderVue/HeaderVue';
 import { mapMutations } from "vuex";
 
@@ -16,7 +16,7 @@ export default {
     HeaderVue,
   },
   beforeCreate () {
-    check().then((data) => {
+    userCheck().then((data) => {
       this.setUserState(data);
       // TODO: loading page after check is authorized user
     }).finally(() => console.log('load failed'));
