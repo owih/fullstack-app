@@ -1,8 +1,8 @@
 @font-face {
     font-family: "icons";
-    src: url("./icons.eot?e7b55dfd97b429ef973cc841d45f452c#iefix") format("embedded-opentype"),
-url("./icons.woff2?e7b55dfd97b429ef973cc841d45f452c") format("woff2"),
-url("./icons.woff?e7b55dfd97b429ef973cc841d45f452c") format("woff");
+    src: url("./icons.eot?cd71d4eeb29d4148c1cdfc6b684d1bf6#iefix") format("embedded-opentype"),
+url("./icons.woff2?cd71d4eeb29d4148c1cdfc6b684d1bf6") format("woff2"),
+url("./icons.woff?cd71d4eeb29d4148c1cdfc6b684d1bf6") format("woff");
 }
 
 i[class^="icon-"]:before, i[class*=" icon-"]:before {
@@ -16,24 +16,48 @@ i[class^="icon-"]:before, i[class*=" icon-"]:before {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-bubble:before {
+.icon-bin:before {
     content: "\f101";
 }
-.icon-bubbles:before {
+.icon-bubble:before {
     content: "\f102";
 }
-.icon-contrast:before {
+.icon-bubbles:before {
     content: "\f103";
 }
-.icon-fire:before {
+.icon-checked:before {
     content: "\f104";
 }
-.icon-home:before {
+.icon-compass:before {
     content: "\f105";
 }
-.icon-notification:before {
+.icon-contrast:before {
     content: "\f106";
 }
-.icon-user:before {
+.icon-exit:before {
     content: "\f107";
+}
+.icon-fire:before {
+    content: "\f108";
+}
+.icon-heart:before {
+    content: "\f109";
+}
+.icon-home:before {
+    content: "\f10a";
+}
+.icon-minus:before {
+    content: "\f10b";
+}
+.icon-notification:before {
+    content: "\f10c";
+}
+.icon-plus:before {
+    content: "\f10d";
+}
+.icon-user:before {
+    content: "\f10e";
+}
+.icon-users:before {
+    content: "\f10f";
 }

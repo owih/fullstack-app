@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import NavbarVue from "@/components/HeaderVue/NavbarVue";
+import NavbarVue from "@/components/Header/NavbarVue";
 import { AUTH_ROUT, PROFILE_ROUT } from "@/routes";
 
 export default {
@@ -92,6 +92,7 @@ export default {
       display: flex;
       justify-content: space-between;
       margin: 0 -8px;
+      align-items: center;
     }
     &__logo-wrapper,
     &__navbar-wrapper,

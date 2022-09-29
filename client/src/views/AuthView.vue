@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import { userLogin, userRegistration } from "@/http/userAPI";
 import { AUTH_ROUT, REGISTRATION_ROUT } from "@/routes";
-import AuthorizationPanel from "@/components/AuthorizationPanel/AuthorizationPanel";
+import AuthorizationPanel from "@/components/Authorization/AuthorizationPanel";
 
 export default {
   name: 'AuthView',
@@ -26,7 +26,7 @@ export default {
     AuthorizationPanel,
   },
   methods: {
-    ...mapMutations([
+    ...mapActions([
       "setUserAuth", "setUser"
     ]),
     async sendData (email, password, login) {

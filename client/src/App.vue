@@ -3,26 +3,31 @@
   <main class="main">
     <router-view/>
   </main>
+  <CreatePostModal id="CreatePostModal"/>
 </template>
 
 <script>
+import HeaderVue from '@/components/Header/HeaderVue';
+import { mapActions } from "vuex";
 import { userCheck } from "@/http/userAPI";
-import HeaderVue from '@/components/HeaderVue/HeaderVue';
-import { mapMutations } from "vuex";
+import CreatePostModal from "@/components/Modals/CreatePostModal";
 
 export default {
   name: 'App',
   components: {
     HeaderVue,
+    CreatePostModal,
   },
   beforeCreate () {
     userCheck().then((data) => {
       this.setUserState(data);
       // TODO: loading page after check is authorized user
-    }).finally(() => console.log('load failed'));
+    })
+      .catch((error) => console.log(error.response.data.message))
+      .finally(() => console.log('load finished'));
   },
   methods: {
-    ...mapMutations([
+    ...mapActions([
       'setUser', 'setUserAuth'
     ]),
     setUserState (user) {

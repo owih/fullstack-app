@@ -1,9 +1,17 @@
 {
-    "bubble": 61697,
-    "bubbles": 61698,
-    "contrast": 61699,
-    "fire": 61700,
-    "home": 61701,
-    "notification": 61702,
-    "user": 61703
+    "bin": 61697,
+    "bubble": 61698,
+    "bubbles": 61699,
+    "checked": 61700,
+    "compass": 61701,
+    "contrast": 61702,
+    "exit": 61703,
+    "fire": 61704,
+    "heart": 61705,
+    "home": 61706,
+    "minus": 61707,
+    "notification": 61708,
+    "plus": 61709,
+    "user": 61710,
+    "users": 61711
 }

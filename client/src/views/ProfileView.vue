@@ -1,17 +1,35 @@
 <template>
-  <ControlPrimary @click="logout">
-    Logout
-  </ControlPrimary>
+  <div :class="$style.root">
+    <div class="container">
+      <ControlPrimary @click="logout">
+        Logout
+      </ControlPrimary>
+      <PostsList :posts="posts"/>
+    </div>
+  </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 import { AUTH_ROUT } from "@/routes";
+import PostsList from "@/components/Profile/PostsList";
 
 export default {
   name: "ProfileView",
+  components: {
+    PostsList,
+  },
+  data () {
+    return {
+      posts: [],
+    }
+  },
+  mounted () {
+    this.getPosts();
+  },
   methods: {
-    ...mapMutations([
+    ...mapActions([
+      'fetchAllPosts',
       "setUserNotAuth",
       "setUser"
     ]),
@@ -20,11 +38,16 @@ export default {
       this.setUser({});
       this.$router.push(AUTH_ROUT);
       localStorage.removeItem('token');
+    },
+    getPosts () {
+      this.fetchAllPosts();
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style module lang="scss">
+  .root {
+    padding: 40px 0;
+  }
 </style>

@@ -2,13 +2,20 @@
   <nav class="navigation">
     <div class="navigation__row" v-if="getIsAuth">
       <div class="navigation__col"
-           v-for="navbarItem in navbarDataAuth" :key="navbarItem.name"
+           v-for="navbarItem in navbarDataAuth"
+           :key="navbarItem.name"
       >
         <div class="navigation__item"
              @click="this.$router.push(navbarItem.link)"
-             v-if="!navbarItem.authorized || getIsAuth"
         >
-          <i class="icon" :class="'icon-' + navbarItem.icon"></i>
+          <i
+            v-if="navbarItem.name !== 'profile'"
+            class="icon"
+            :class="'icon-' + navbarItem.icon"
+          ></i>
+          <div v-else class="navigation__avatar">
+            <img :src="require('../../assets/images/profile/profile-empty.jpg')" alt="" class="navigation__image">
+          </div>
         </div>
       </div>
     </div>
@@ -18,9 +25,11 @@
       >
         <div class="navigation__item"
              @click="this.$router.push(navbarItem.link)"
-             v-if="!navbarItem.authorized || getIsAuth"
         >
-          <i class="icon" :class="'icon-' + navbarItem.icon"></i>
+          <i
+            class="icon"
+            :class="'icon-' + navbarItem.icon"
+          ></i>
         </div>
       </div>
     </div>
@@ -58,6 +67,7 @@ export default {
     &__row {
       display: flex;
       margin: 0 -8px;
+      align-items: center;
     }
     &__col {
       padding: 0 8px;
@@ -71,6 +81,15 @@ export default {
       cursor: pointer;
       &:hover {
         color: $primary;
+      }
+    }
+    &__avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 32px;
+      overflow: hidden;
+      img {
+        width: 100%;
       }
     }
   }

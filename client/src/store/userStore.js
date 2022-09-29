@@ -12,18 +12,25 @@ export default {
     }
   },
   mutations: {
-    setUserAuth (state) {
+    SET_USER_AUTH (state) {
       state.isAuth = true;
     },
-    setUserNotAuth (state) {
+    SET_USER_NOT_AUTH (state) {
       state.isAuth = false;
     },
-    setUser (state, data) {
+    SET_USER (state, data) {
       state.user = data;
     }
   },
   actions: {
+    setUserAuth ({ commit }) {
+      commit('SET_USER_AUTH')
+    },
+    setUserNotAuth ({ commit }) {
+      commit('SET_USER_NOT_AUTH');
+    },
+    setUser ({ commit }, data) {
+      commit('SET_USER', data);
+    },
   },
-  modules: {
-  }
 }

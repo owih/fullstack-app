@@ -14,10 +14,6 @@ const Profile = sequelize.define('profile', {
   img: {type: DataTypes.STRING},
 });
 
-const ProfilePost = sequelize.define('profile_post', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-});
-
 const Subscribe = sequelize.define('subscribe', {
    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
    subscriber_id: {type: DataTypes.INTEGER},
@@ -49,14 +45,11 @@ Profile.belongsTo(User);
 User.hasMany(LikeState);
 LikeState.belongsTo(User);
 
-Profile.hasMany(ProfilePost);
-ProfilePost.belongsTo(Profile);
+Profile.hasMany(Post);
+Post.belongsTo(Profile);
 
 Profile.hasMany(Subscribe);
 Subscribe.belongsTo(Profile);
-
-Post.hasMany(ProfilePost);
-ProfilePost.belongsTo(Post);
 
 Post.hasMany(LikeState);
 LikeState.belongsTo(Post);
@@ -64,7 +57,6 @@ LikeState.belongsTo(Post);
 module.exports = {
   User,
   Profile,
-  ProfilePost,
   Post,
   LikeState,
 }
