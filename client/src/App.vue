@@ -1,9 +1,12 @@
 <template>
-  <HeaderVue />
-  <main class="main">
-    <router-view/>
-  </main>
-  <CreatePostModal id="CreatePostModal"/>
+  <div v-if="isLoad">
+    <HeaderVue />
+    <main class="main">
+      <router-view/>
+    </main>
+    <CreatePostModal :id="createPostModal"/>
+    <OpenPostModal id="OpenPostModal"/>
+  </div>
 </template>
 
 <script>
@@ -11,20 +14,32 @@ import HeaderVue from '@/components/Header/HeaderVue';
 import { mapActions } from "vuex";
 import { userCheck } from "@/http/userAPI";
 import CreatePostModal from "@/components/Modals/CreatePostModal";
+import OpenPostModal from "@/components/Modals/OpenPostModal";
+import { CREATE_POST_MODAL, OPEN_POST_MODAL } from "@/stubs/modals";
 
 export default {
   name: 'App',
+  data () {
+    return {
+      isLoad: false,
+      createPostModal: CREATE_POST_MODAL,
+      openPostModal: OPEN_POST_MODAL,
+    }
+  },
   components: {
     HeaderVue,
     CreatePostModal,
+    OpenPostModal,
   },
   beforeCreate () {
     userCheck().then((data) => {
       this.setUserState(data);
-      // TODO: loading page after check is authorized user
     })
       .catch((error) => console.log(error.response.data.message))
-      .finally(() => console.log('load finished'));
+      .finally(() => {
+        console.log('load finished');
+        this.isLoad = true;
+      });
   },
   methods: {
     ...mapActions([

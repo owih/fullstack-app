@@ -1,14 +1,22 @@
 <template>
-  <div class="post-item">
-    <img src="#" alt="">
+  <div class="post-item" @click="openPostModal">
+    <img
+      class="post-item__image"
+      :src="src + post.img"
+      alt=""
+    >
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
 
 export default {
   name: "PostItem",
+  data () {
+    return {
+      src: process.env.VUE_APP_API_URL,
+    }
+  },
   props: {
     post: {
       type: Object,
@@ -16,16 +24,29 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'open'
-    ]),
     openPostModal () {
-      this.open('postModal');
+      this.$router.push({ query: { post: this.post.id } });
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+@import "../../assets/styles/variables";
+  .post-item {
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover & {
+      &__image {
+        filter: brightness(0.7);
+      }
+    }
+    &__image {
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      filter: brightness(1);
+    }
+  }
 </style>

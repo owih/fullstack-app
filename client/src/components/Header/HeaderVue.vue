@@ -23,7 +23,7 @@
 
 <script>
 import NavbarVue from "@/components/Header/NavbarVue";
-import { AUTH_ROUT, PROFILE_ROUT } from "@/routes";
+import { AUTH_ROUT, PROFILE_ROUT } from "@/stubs/routes";
 
 export default {
   name: "HeaderVue",

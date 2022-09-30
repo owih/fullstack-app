@@ -10,7 +10,7 @@
 <script>
 import { mapActions } from 'vuex';
 import { userLogin, userRegistration } from "@/http/userAPI";
-import { AUTH_ROUT, REGISTRATION_ROUT } from "@/routes";
+import { AUTH_ROUT, REGISTRATION_ROUT } from "@/stubs/routes";
 import AuthorizationPanel from "@/components/Authorization/AuthorizationPanel";
 
 export default {

@@ -6,11 +6,11 @@ const User = sequelize.define('users', {
   email: {type: DataTypes.STRING, unique: true},
   password: {type: DataTypes.STRING},
   role: {type: DataTypes.STRING, defaultValue: 'user'},
-  login: {type: DataTypes.STRING, unique: true},
 });
 
 const Profile = sequelize.define('profile', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+  login: {type: DataTypes.STRING, unique: true, allowNull: false},
   img: {type: DataTypes.STRING},
 });
 

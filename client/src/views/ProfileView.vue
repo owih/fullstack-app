@@ -1,28 +1,27 @@
 <template>
   <div :class="$style.root">
     <div class="container">
-      <ControlPrimary @click="logout">
+      <div :class="$style.panel">
+        <ProfilePanel />
+      </div>
+      <ControlPrimary @click="logout" style="margin-bottom: 32px">
         Logout
       </ControlPrimary>
-      <PostsList :posts="posts"/>
+      <PostsList :posts="getAllPosts"/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { AUTH_ROUT } from "@/routes";
+import { mapActions, mapGetters } from "vuex";
+import { AUTH_ROUT } from "@/stubs/routes";
 import PostsList from "@/components/Profile/PostsList";
+import ProfilePanel from "@/components/Profile/ProfilePanel";
 
 export default {
   name: "ProfileView",
   components: {
-    PostsList,
-  },
-  data () {
-    return {
-      posts: [],
-    }
+    PostsList, ProfilePanel
   },
   mounted () {
     this.getPosts();
@@ -42,12 +41,20 @@ export default {
     getPosts () {
       this.fetchAllPosts();
     }
-  }
+  },
+  computed: {
+    ...mapGetters([
+      'getAllPosts'
+    ]),
+  },
 }
 </script>
 
 <style module lang="scss">
   .root {
     padding: 40px 0;
+    .panel {
+      margin-bottom: 32px;
+    }
   }
 </style>

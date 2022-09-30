@@ -19,7 +19,8 @@ class PostController {
     }
   }
   async getAll(req, res) {
-     let {limit, page} = req.query;
+    console.log('getAll')
+    let {limit, page} = req.query;
      page = page || 1;
      limit = limit || 9;
      const offset = page * limit - limit;
@@ -27,6 +28,7 @@ class PostController {
      return res.json(posts);
   }
   async getOne(req, res) {
+    console.log('getOne')
      const {id} = req.params;
      const post = await Post.findOne({ where: {id} });
      return res.json(post);

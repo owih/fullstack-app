@@ -32,7 +32,7 @@ export default {
       'close'
     ]),
     closeModal () {
-      console.log('close')
+      this.$router.replace({ post: '' })
       this.close(this.name)
     }
   },
@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 *:focus {
   outline: none;
 }
@@ -61,10 +61,10 @@ export default {
 .modal-wrapper {
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  padding: 20px;
+  padding: 12px;
   transition: all 0.3s ease;
-  max-height: 80%;
-  max-width: 300px;
+  height: 540px;
+  max-width: 900px;
   width: 100%;
   position: fixed;
   top: 50%;
@@ -72,6 +72,16 @@ export default {
   transform: translate(-50%, -50%);
 }
 .modal-wrapper button {
-  float: right;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  .icon {
+    transform: rotate(45deg);
+    font-size: 18px;
+  }
 }
 </style>
