@@ -9,7 +9,7 @@
       <div class="profile-panel__right">
         <div class="profile-panel__header">
           <div class="profile-panel__name">
-            some unique name
+            profile name
           </div>
           <div class="profile-panel__logout">
             Change profile

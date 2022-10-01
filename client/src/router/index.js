@@ -18,8 +18,13 @@ const routes = [
     alias: REGISTRATION_ROUT,
   },
   {
+    path: PROFILE_ROUT + '/:id',
+    name: 'profile_with_id',
+    component: ProfileView,
+  },
+  {
     path: PROFILE_ROUT,
-    name: 'profile/:id',
+    name: 'profile',
     component: ProfileView,
   },
 ]

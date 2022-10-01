@@ -84,4 +84,9 @@ export default {
     font-size: 18px;
   }
 }
+.without-spacers {
+  .modal-wrapper {
+    padding: 0;
+  }
+}
 </style>

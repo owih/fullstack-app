@@ -1,7 +1,7 @@
 <template>
   <div class="posts-list">
     <div class="posts-list__row">
-      <div class="posts-list__col">
+      <div class="posts-list__col" v-if="Number(this.$route.params.id) === this.getUser.id || this.$route.fullPath === profileSrc">
         <div
           class="posts-list__create"
           @click="openCreatePostModal"
@@ -22,10 +22,16 @@
 
 <script>
 import PostItem from "@/components/Profile/PostItem";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import { PROFILE_ROUT } from "@/stubs/routes";
 
 export default {
   name: "PostsList",
+  data () {
+    return {
+      profileSrc: PROFILE_ROUT,
+    }
+  },
   components: {
     PostItem,
   },
@@ -35,8 +41,10 @@ export default {
       required: true,
     },
   },
-  mounted () {
-    console.log(this.posts)
+  computed: {
+    ...mapGetters([
+      'getUser'
+    ]),
   },
   methods: {
     ...mapActions([

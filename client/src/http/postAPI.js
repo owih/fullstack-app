@@ -6,8 +6,8 @@ export const createPost = async (description, img, profileId) => {
   return data;
 }
 
-export const fetchPosts = async (page, limit) => {
-  const { data } = await host.get('api/post', { params: { page, limit } });
+export const fetchPosts = async (page, limit, profileId) => {
+  const { data } = await host.get('api/post', { params: { page, limit, profileId } });
   return data;
 }
 

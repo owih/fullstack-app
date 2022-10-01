@@ -14,7 +14,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { AUTH_ROUT } from "@/stubs/routes";
+import { AUTH_ROUT, PROFILE_ROUT } from "@/stubs/routes";
 import PostsList from "@/components/Profile/PostsList";
 import ProfilePanel from "@/components/Profile/ProfilePanel";
 
@@ -25,6 +25,11 @@ export default {
   },
   mounted () {
     this.getPosts();
+  },
+  watch: {
+    $route (to, from) {
+      if (to.fullPath.includes(PROFILE_ROUT)) { this.getPosts() }
+    }
   },
   methods: {
     ...mapActions([
@@ -39,12 +44,17 @@ export default {
       localStorage.removeItem('token');
     },
     getPosts () {
-      this.fetchAllPosts();
+      if (this.$route.params.id || this.getUser.id) {
+        console.log(this.$route.params.id)
+        this.fetchAllPosts(this.$route.params.id || this.getUser.id);
+      }
     }
   },
   computed: {
     ...mapGetters([
-      'getAllPosts'
+      'getAllPosts',
+      'getUser',
+      'getIsAuth'
     ]),
   },
 }

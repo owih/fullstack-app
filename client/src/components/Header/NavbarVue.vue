@@ -6,7 +6,7 @@
            :key="navbarItem.name"
       >
         <div class="navigation__item"
-             @click="this.$router.push(navbarItem.link)"
+             @click="this.$router.push(navbarItem.name === 'profile' && getIsAuth ? navbarItem.link + '/' + getUser.id : navbarItem.link)"
         >
           <i
             v-if="navbarItem.name !== 'profile'"
@@ -54,7 +54,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      "getIsAuth"
+      "getIsAuth",
+      "getUser"
     ])
   }
 }

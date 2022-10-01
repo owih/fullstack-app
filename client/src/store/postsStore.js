@@ -26,8 +26,8 @@ export default {
     }
   },
   actions: {
-    async fetchAllPosts ({ commit }) {
-      fetchPosts().then((posts) => {
+    async fetchAllPosts ({ commit }, profileId) {
+      fetchPosts(profileId).then((posts) => {
         commit('SET_ALL_POSTS', posts.rows);
       })
     },
