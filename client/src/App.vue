@@ -1,35 +1,28 @@
 <template>
-  <div v-if="isLoad">
+  <WrapperVue v-if="isLoad">
     <HeaderVue />
     <main class="main">
       <router-view/>
     </main>
-    <CreatePostModal :id="createPostModal"/>
-    <OpenPostModal id="OpenPostModal"/>
-  </div>
+  </WrapperVue>
 </template>
 
 <script>
 import HeaderVue from '@/components/Header/HeaderVue';
+import WrapperVue from "@/components/Wrapper/WrapperVue";
 import { mapActions } from "vuex";
 import { userCheck } from "@/http/userAPI";
-import CreatePostModal from "@/components/Modals/CreatePostModal";
-import OpenPostModal from "@/components/Modals/OpenPostModal";
-import { CREATE_POST_MODAL, OPEN_POST_MODAL } from "@/stubs/modals";
 
 export default {
   name: 'App',
   data () {
     return {
       isLoad: false,
-      createPostModal: CREATE_POST_MODAL,
-      openPostModal: OPEN_POST_MODAL,
     }
   },
   components: {
     HeaderVue,
-    CreatePostModal,
-    OpenPostModal,
+    WrapperVue,
   },
   beforeCreate () {
     userCheck().then((data) => {
@@ -49,7 +42,7 @@ export default {
       this.setUser(user);
       this.setUserAuth();
     },
-  }
+  },
 }
 </script>
 

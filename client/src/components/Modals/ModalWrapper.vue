@@ -63,7 +63,6 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   padding: 12px;
   transition: all 0.3s ease;
-  height: 540px;
   max-width: 900px;
   width: 100%;
   position: fixed;

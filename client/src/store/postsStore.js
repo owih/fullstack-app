@@ -22,17 +22,19 @@ export default {
       state.post = post;
       console.log(post)
     },
-    ADD_NEW_POST (state) {
+    ADD_NEW_POST (state, post) {
+      state.posts.push(post);
     }
   },
   actions: {
-    async fetchAllPosts ({ commit }, profileId) {
+    fetchAllPosts ({ commit }, profileId) {
       fetchPosts(profileId).then((posts) => {
         commit('SET_ALL_POSTS', posts.rows);
       })
     },
-    createPost ({ commit }, description, img, profileId) {
-      createPost(description, img, profileId).then((data) => data)
+    createPost ({ commit }, postData) {
+      createPost(postData).then((data) => data)
+        .then((post) => commit('ADD_NEW_POST', post))
         .catch((error) => error)
     },
     async getPostPerId ({ commit }, id) {

@@ -1,8 +1,7 @@
 import { host } from "@/http/index";
 
-export const createPost = async (description, img, profileId) => {
-  const { data } = await host.post('api/post', { description, img, profileId });
-  console.log(data)
+export const createPost = async (postData) => {
+  const { data } = await host.post('api/post', postData);
   return data;
 }
 

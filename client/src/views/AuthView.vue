@@ -1,9 +1,11 @@
 <template>
-  <h1>
-    {{ isRegistration ? registrationText : authorizationText }}
-  </h1>
-  <div class="authorization-wrapper">
-    <AuthorizationPanel :isRegistration="isRegistration" @switchRoute="switchRoute" @sendData="sendData"/>
+  <div class="authorization">
+    <h1>
+      {{ isRegistration ? registrationText : authorizationText }}
+    </h1>
+    <div class="authorization__inner">
+      <AuthorizationPanel :isRegistration="isRegistration" @switchRoute="switchRoute" @sendData="sendData"/>
+    </div>
   </div>
 </template>
 
@@ -60,8 +62,11 @@ export default {
 
 <style scoped lang="scss">
 @import "../assets/styles/mixins";
-  .authorization-wrapper {
-    display: flex;
-    justify-content: center;
+  .authorization {
+    text-align: center;
+    &__inner {
+      display: flex;
+      justify-content: center;
+    }
   }
 </style>

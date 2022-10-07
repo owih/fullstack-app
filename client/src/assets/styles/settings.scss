@@ -44,7 +44,12 @@ body {
 }
 .wrapper {
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  height: 100%;
+  &_scroll-blocked {
+    overflow: hidden;
+  }
 }
 .container {
   padding: 0 16px;

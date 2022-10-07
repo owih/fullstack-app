@@ -4,9 +4,7 @@
       <div class="create-post-modal__row">
         <div class="create-post-modal__left">
           <div class="create-post-modal__image-wrapper">
-            <div v-if="imagePreviewSrc">
-              <img class="create-post-modal__img" :src="imagePreviewSrc" alt="">
-            </div>
+            <img v-if="imagePreviewSrc" class="create-post-modal__img" :src="imagePreviewSrc" alt="">
             <div v-else class="create-post-modal__preview">
               Image preview
             </div>
@@ -69,8 +67,7 @@ export default {
   }
   &__left {
     flex: 0 0 540px;
-    max-height: 540px;
-    height: 100%;
+    height: 540px;
   }
   &__right {
     flex: 1 0 auto;
