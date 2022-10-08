@@ -1,7 +1,11 @@
 <template>
   <div class="wrapper" :class="{
     'wrapper_scroll-blocked': allOpen.length,
-  }">
+  }"
+       :style="{
+    'paddingRight = window.innerWidth - document.body.offsetWidth': allOpen.length,
+       }"
+  >
       <slot></slot>
       <CreatePostModal :id="createPostModal"/>
       <OpenPostModal id="OpenPostModal"/>

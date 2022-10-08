@@ -3,21 +3,20 @@
     <div class="profile-panel__row">
       <div class="profile-panel__left">
         <div class="profile-panel__image-wrapper">
-          <img :src="require('@/assets/images/profile/profile-empty.jpg')" alt="" class="profile-panel__image">
+          <img :src="getCurrentProfileData ? dbAppSrc + getCurrentProfileData.img : require('@/assets/images/profile/profile-empty.jpg')"
+               alt=""
+               class="profile-panel__image">
         </div>
       </div>
-      <div class="profile-panel__right">
+      <div class="profile-panel__center">
         <div class="profile-panel__header">
           <div class="profile-panel__name">
-            profile name
-          </div>
-          <div class="profile-panel__logout">
-            Change profile
+            {{ getCurrentProfileData ? getCurrentProfileData.login : 'User not found' }}
           </div>
         </div>
         <div class="profile-panel__statistics">
           <div class="profile-panel__statistic-item">
-            <strong>2</strong> posts
+            <strong>{{ getCurrentProfileData && getCurrentProfilePosts.length }}</strong> posts
           </div>
           <div class="profile-panel__statistic-item">
             <strong>0</strong> followers
@@ -27,8 +26,20 @@
           </div>
         </div>
         <div class="profile-panel__about">
-          <div><strong>Hi its my profile</strong></div>
-          <div>Some text about my life and hobbies :3</div>
+          <div><strong>{{ getCurrentProfileData && getCurrentProfileData.status }}</strong></div>
+          <div>{{ getCurrentProfileData && getCurrentProfileData.description || 'Here will be some information...'}}</div>
+        </div>
+      </div>
+      <div class="profile-panel__right">
+        <div class="profile-panel__control-item">
+          <ControlPrimary @click="this.goToSettings()">
+            Profile settings
+          </ControlPrimary>
+        </div>
+        <div class="profile-panel__control-item">
+          <ControlPrimary @click="logout">
+            Logout
+          </ControlPrimary>
         </div>
       </div>
     </div>
@@ -36,8 +47,40 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+import { AUTH_ROUT, PROFILE_SETTINGS } from "@/stubs/routes";
+
 export default {
-  name: "ProfilePanel"
+  name: "ProfilePanel",
+  data () {
+    return {
+      dbAppSrc: process.env.VUE_APP_API_URL,
+    }
+  },
+  mounted () {
+    this.fetchCurrentProfilePerId(this.$route.params.id || this.getUser.id);
+  },
+  computed: {
+    ...mapGetters([
+      'getUser',
+      'getCurrentProfileData',
+      'getCurrentProfilePosts'
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'fetchCurrentProfilePerId',
+      "logoutUser"
+    ]),
+    goToSettings () {
+      this.$router.push(PROFILE_SETTINGS);
+    },
+    logout () {
+      this.logoutUser();
+      localStorage.removeItem('token');
+      this.$router.push(AUTH_ROUT);
+    },
+  }
 }
 </script>
 
@@ -63,20 +106,32 @@ export default {
       height: 120px;
       object-fit: cover;
     }
+    &__center {
+      padding: 8px;
+      flex: 0 0 33.3333%;
+    }
     &__right {
       padding: 8px;
+      flex: 0 0 33.3333%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    &__right & {
+      &__control-item {
+        width: 50%;
+      }
     }
     &__header {
       display: flex;
       margin: 0 -8px 16px;
       align-items: center;
+      justify-content: space-between;
     }
     &__name {
       padding: 0 8px;
       font-size: 24px;
-    }
-    &__logout {
-      padding: 0 8px;
     }
     &__statistics {
       display: flex;
@@ -85,6 +140,11 @@ export default {
     }
     &__statistic-item {
       padding: 0 8px;
+    }
+    &__control-item {
+      &:not(:last-child) {
+        margin-bottom: 8px;
+      }
     }
   }
 </style>

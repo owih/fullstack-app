@@ -11,7 +11,6 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { userLogin, userRegistration } from "@/http/userAPI";
 import { AUTH_ROUT, REGISTRATION_ROUT } from "@/stubs/routes";
 import AuthorizationPanel from "@/components/Authorization/AuthorizationPanel";
 
@@ -29,23 +28,11 @@ export default {
   },
   methods: {
     ...mapActions([
-      "setUserAuth", "setUser"
+      'registrationUser', 'loginUser'
     ]),
     async sendData (email, password, login) {
-      try {
-        let user;
-        console.log(email, password, login)
-        if (this.isRegistration) {
-          user = await userRegistration(email, password, login);
-        } else {
-          user = await userLogin(email, password);
-        }
-        this.setUser(user);
-        this.setUserAuth();
-        this.$router.push('/')
-      } catch (error) {
-        console.log(error.response.data.message);
-      }
+      if (this.isRegistration) await this.registrationUser({ email, password, login })
+      else await this.loginUser({ email, password });
     },
     switchRoute () {
       if (this.isRegistration) {

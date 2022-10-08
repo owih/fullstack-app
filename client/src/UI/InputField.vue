@@ -1,14 +1,15 @@
 <template>
+  <label class="label" :for="uniqueId">
+    <slot></slot>
+  </label>
   <input
+      class="input"
       :value="modelValue"
       :placeholder="placeholder"
       @input="updateInput"
       :id="uniqueId"
       :type="type || 'text'"
   >
-  <label :for="uniqueId">
-    <slot></slot>
-  </label>
 </template>
 <script>
 import { v4 } from 'uuid';
@@ -54,7 +55,7 @@ export default {
 
 <style scoped lang="scss">
 @import "../assets/styles/variables";
-  input {
+  .input {
     font-size: 14px;
     padding: 12px;
     border: 1px solid $gray-500;
@@ -66,5 +67,10 @@ export default {
     &:focus {
       border-color: $gray-700;
     }
+  }
+  .label {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 16px;
   }
 </style>

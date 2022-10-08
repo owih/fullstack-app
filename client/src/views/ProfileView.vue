@@ -1,13 +1,15 @@
 <template>
   <div :class="$style.root">
     <div class="container">
-      <div :class="$style.panel">
-        <ProfilePanel />
+      <div v-if="!this.getCurrentProfileData" class="profile__error">
+        Profile not found...
       </div>
-      <ControlPrimary @click="logout" style="margin-bottom: 32px">
-        Logout
-      </ControlPrimary>
-      <PostsList :posts="getAllPosts"/>
+      <div v-else>
+        <div :class="$style.panel">
+          <ProfilePanel />
+        </div>
+        <PostsList :posts="getCurrentProfilePosts"/>
+      </div>
     </div>
   </div>
 </template>
@@ -33,26 +35,20 @@ export default {
   },
   methods: {
     ...mapActions([
-      'fetchAllPosts',
-      "setUserNotAuth",
-      "setUser"
+      'fetchPostsPerCurrentProfile',
     ]),
-    logout () {
-      this.setUserNotAuth();
-      this.setUser({});
-      this.$router.push(AUTH_ROUT);
-      localStorage.removeItem('token');
-    },
     getPosts () {
       if (this.$route.params.id || this.getUser.id) {
-        console.log(this.$route.params.id)
-        this.fetchAllPosts(this.$route.params.id || this.getUser.id);
+        this.fetchPostsPerCurrentProfile(this.$route.params.id || this.getUser.id);
+      } else {
+        this.$router.push(AUTH_ROUT);
       }
     }
   },
   computed: {
     ...mapGetters([
-      'getAllPosts',
+      'getCurrentProfilePosts',
+      'getCurrentProfileData',
       'getUser',
       'getIsAuth'
     ]),

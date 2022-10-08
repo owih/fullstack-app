@@ -67,6 +67,14 @@ body {
   }
 }
 
+h1,h2,h3,h4,h5,h6 {
+  line-height: $headings-line-height;
+  font-weight: $headings-font-weight;
+  margin-bottom: $headings-margin-bottom;
+  margin-top: $headings-margin-top;
+  font-family: $headings-font-family;
+}
+
 .text-link {
   color: var(--themetoggle);
   text-decoration: none;

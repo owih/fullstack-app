@@ -1,5 +1,5 @@
 <template>
-  <WrapperVue v-if="isLoad">
+  <WrapperVue v-if="this.getLoadedState">
     <HeaderVue />
     <main class="main">
       <router-view/>
@@ -10,8 +10,7 @@
 <script>
 import HeaderVue from '@/components/Header/HeaderVue';
 import WrapperVue from "@/components/Wrapper/WrapperVue";
-import { mapActions } from "vuex";
-import { userCheck } from "@/http/userAPI";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: 'App',
@@ -24,25 +23,19 @@ export default {
     HeaderVue,
     WrapperVue,
   },
-  beforeCreate () {
-    userCheck().then((data) => {
-      this.setUserState(data);
-    })
-      .catch((error) => console.log(error.response.data.message))
-      .finally(() => {
-        console.log('load finished');
-        this.isLoad = true;
-      });
+  beforeMount () {
+    this.checkIsAuthorized()
   },
   methods: {
     ...mapActions([
-      'setUser', 'setUserAuth'
+      'checkIsAuthorized'
     ]),
-    setUserState (user) {
-      this.setUser(user);
-      this.setUserAuth();
-    },
   },
+  computed: {
+    ...mapGetters([
+      'getLoadedState'
+    ]),
+  }
 }
 </script>
 

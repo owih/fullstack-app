@@ -51,7 +51,6 @@ export default {
       'open'
     ]),
     openCreatePostModal () {
-      console.log('open')
       this.open('CreatePostModal');
     }
   }

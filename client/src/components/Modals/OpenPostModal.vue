@@ -12,16 +12,16 @@
           <div class="post-modal__about">
             <div class="post-modal__profile">
               <div class="post-modal__avatar">
-                <img :src="require('../../assets/images/profile/profile-empty.jpg')" alt="" class="image">
+                <img :src="getPostOwnerProfile ? src + getPostOwnerProfile.img : require('../../assets/images/profile/profile-empty.jpg')" alt="" class="image">
               </div>
-              Name author
+              {{ getPostOwnerProfile && getPostOwnerProfile.login }}
             </div>
           </div>
           <div class="post-modal__description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta dolorem eius esse facere nihil numquam quaerat quisquam, reiciendis vel. Ab animi blanditiis dolor error hic quaerat quo reprehenderit, saepe veritatis.
+            {{ getPost.description }}
           </div>
           <div class="post-modal__likes">
-            <strong>202</strong> likes
+            <strong>{{ getPost.likes }}</strong> likes
           </div>
           <div class="post-modal__comments">
             <PostComments />
@@ -64,6 +64,7 @@ export default {
   methods: {
     ...mapActions([
       'getPostPerId',
+      'fetchProfilePerPostOwner',
       'open'
     ]),
     openModal () {
@@ -72,7 +73,7 @@ export default {
     checkIsOpen () {
       if (this.$route.query.post) {
         this.openModal();
-        this.getPostPerId(this.$route.query.post);
+        this.getPostPerId(this.$route.query.post).then(() => this.fetchProfilePerPostOwner(this.getPost.profileId));
         this.isOpen = true;
       }
     }
@@ -80,6 +81,7 @@ export default {
   computed: {
     ...mapGetters([
       'getPost',
+      'getPostOwnerProfile'
     ]),
   },
 }
@@ -107,6 +109,8 @@ export default {
     }
     &__right {
       padding: 16px;
+      display: flex;
+      flex-direction: column;
     }
     &__profile {
       font-size: 18px;
@@ -133,6 +137,7 @@ export default {
       .image {
         width: 100%;
         height: 100%;
+        object-fit: cover;
       }
     }
     &__likes {
@@ -140,6 +145,13 @@ export default {
       padding-bottom: 8px;
       border-bottom: 1px solid $gray-300;
       margin-bottom: 8px;
+    }
+    &__comments {
+      flex: 1 0 300px;
+      overflow: auto;
+    }
+    &__description {
+      flex: 0 1 30px;
     }
   }
 </style>

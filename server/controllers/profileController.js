@@ -1,4 +1,6 @@
 const {Profile} = require('../models/models');
+const uuid = require("uuid");
+const path = require("path");
 
 class ProfileController {
   async getAll(req, res) {
@@ -13,6 +15,25 @@ class ProfileController {
      const {id} = req.params;
      const profile = await Profile.findOne({ where: {id} });
      return res.json(profile);
+  }
+  async changeProfileData(req, res) {
+    const { name, status, description } = req.body;
+    console.log(req.body)
+    const {id} = req.params;
+    const profile = await Profile.findOne({where: {id}});
+
+    if (req.files) {
+      const {img} = req.files;
+      const fileName = uuid.v4() + '.jpg';
+      img.mv(path.resolve(__dirname, '..', 'static', fileName));
+      await profile.update({name, description, status, img: fileName});
+      await profile.save();
+      return res.json(profile);
+    } else {
+      await profile.update({name, description, status });
+      await profile.save();
+      return res.json(profile);
+    }
   }
 }
 
