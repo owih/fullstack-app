@@ -1,4 +1,4 @@
-import { putNewProfileData, fetchProfile } from "@/http/profileAPI";
+import { putNewProfileData, fetchProfile, fetchProfiles } from "@/http/profileAPI";
 
 export default {
   state: () => ({
@@ -23,6 +23,12 @@ export default {
     },
     SET_POST_OWNER_DATA (state, data) {
       state.postOwnerProfile = data;
+    },
+    SET_ALL_PROFILES (state, data) {
+      state.profiles = data;
+    },
+    CLEAR_PROFILE_STATE (state) {
+      state.currentProfile = {};
     }
   },
   actions: {
@@ -55,6 +61,22 @@ export default {
         .catch((error) => {
           console.log(error);
         })
+    },
+    async fetchAllProfilesList ({ commit }, { page, limit }) {
+      return new Promise((resolve, reject) => {
+        fetchProfiles(page, limit)
+          .then((data) => {
+            commit('SET_ALL_PROFILES', data.rows);
+            resolve(data.count);
+          })
+          .catch((error) => {
+            console.log(error);
+            reject(error);
+          })
+      })
+    },
+    clearCurrentProfileState ({ commit }) {
+      commit('CLEAR_PROFILE_STATE');
     }
   },
 }

@@ -29,6 +29,12 @@ export default {
     },
     ADD_NEW_POST (state, post) {
       state.currentProfilePosts.push(post);
+    },
+    CLEAR_POST_STATE (state) {
+      state.post = {};
+    },
+    CLEAR_POSTS_STATE (state) {
+      state.currentProfilePosts = [];
     }
   },
   actions: {
@@ -38,7 +44,8 @@ export default {
       })
     },
     fetchPostsPerCurrentProfile ({ commit }, profileId) {
-      fetchPosts(profileId).then((posts) => {
+      console.log(profileId)
+      fetchPosts({ profileId }).then((posts) => {
         console.log(posts)
         commit('SET_CURRENT_PROFILE_POSTS', posts.rows);
       })
@@ -48,7 +55,7 @@ export default {
         .then((post) => commit('ADD_NEW_POST', post))
         .catch((error) => error)
     },
-    async getPostPerId ({ commit }, id) {
+    async fetchPostPerId ({ commit }, id) {
       return new Promise((resolve, reject) => {
         fetchPost(id)
           .then((post) => {
@@ -61,5 +68,11 @@ export default {
           })
       })
     },
+    clearCurrentPostState ({ commit }) {
+      commit('CLEAR_POST_STATE');
+    },
+    clearPostsState ({ commit }) {
+      commit('CLEAR_POSTS_STATE');
+    }
   },
 }

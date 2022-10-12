@@ -26,7 +26,7 @@ class PostController {
       const offset = page * limit - limit;
       let posts = [];
       if (profileId) {
-        posts = await Post.findAll({limit, offset, where: { profileId }});
+        posts = await Post.findAndCountAll({limit, offset, where: { profileId }});
       } else {
         posts = await Post.findAndCountAll({limit, offset});
       }

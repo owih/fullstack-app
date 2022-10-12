@@ -3,7 +3,8 @@ import HomeView from '@/views/HomeView.vue'
 import AuthView from '@/views/AuthView'
 import ProfileView from "@/views/ProfileView";
 import ProfileSettingsView from "@/views/ProfileSettingsView";
-import { AUTH_ROUT, REGISTRATION_ROUT, HOME_ROUT, PROFILE_ROUT, PROFILE_SETTINGS } from "@/stubs/routes";
+import { AUTH_ROUT, REGISTRATION_ROUT, HOME_ROUT, PROFILE_ROUT, PROFILE_SETTINGS, PROFILE_LIST } from "@/stubs/routes";
+import ProfilesView from "@/views/ProfilesView";
 
 const routes = [
   {
@@ -32,6 +33,11 @@ const routes = [
     path: PROFILE_SETTINGS,
     name: 'profile-settings',
     component: ProfileSettingsView,
+  },
+  {
+    path: PROFILE_LIST,
+    name: 'ProfilesView',
+    component: ProfilesView,
   },
 ]
 

@@ -1,7 +1,9 @@
 <template>
   <div class="posts-list">
     <div class="posts-list__row">
-      <div class="posts-list__col" v-if="Number(this.$route.params.id) === this.getUser.id || this.$route.fullPath === profileSrc">
+      <div class="posts-list__col"
+           v-if="Number(this.$route.params.id) === this.getUser.id || this.$route.fullPath === profileSrc"
+      >
         <div
           class="posts-list__create"
           @click="openCreatePostModal"

@@ -87,7 +87,7 @@ $headings-font-family: $font-family-roboto;
 // <- Настройки шрифта
 
 // Transition
-$transition-base:            color .2s ease-in-out, background-color .15s ease-in-out, border-color .2s ease-in-out, font-size .2s ease-in-out,
+$transition-base:            color .2s ease-in-out, background-color .15s ease-in-out, border-color .2s ease-in-out, font-size .2s ease-in-out, box-shadow .2s ease-in-out,
 transform .2s ease-in-out;
 $transition-timeout:              opacity .2s ease-in-out, transform .2s ease-in-out;
 $transition-timeout-sm:           opacity .2s ease-in-out 0.3s, transform .2s ease-in-out 0.3s;

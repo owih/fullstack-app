@@ -3,7 +3,7 @@
     <div class="profile-panel__row">
       <div class="profile-panel__left">
         <div class="profile-panel__image-wrapper">
-          <img :src="getCurrentProfileData ? dbAppSrc + getCurrentProfileData.img : require('@/assets/images/profile/profile-empty.jpg')"
+          <img :src="getCurrentProfileData && getCurrentProfileData.img ? dbAppSrc + getCurrentProfileData.img : require('@/assets/images/profile/profile-empty.jpg')"
                alt=""
                class="profile-panel__image">
         </div>
@@ -16,7 +16,7 @@
         </div>
         <div class="profile-panel__statistics">
           <div class="profile-panel__statistic-item">
-            <strong>{{ getCurrentProfileData && getCurrentProfilePosts.length }}</strong> posts
+            <strong>{{ getCurrentProfilePosts ? getCurrentProfilePosts.length : 0 }}</strong> posts
           </div>
           <div class="profile-panel__statistic-item">
             <strong>0</strong> followers
@@ -31,14 +31,35 @@
         </div>
       </div>
       <div class="profile-panel__right">
-        <div class="profile-panel__control-item">
+        <div
+          class="profile-panel__control-item"
+          v-if="getCurrentProfileData.id === getUser.id"
+        >
           <ControlPrimary @click="this.goToSettings()">
             Profile settings
           </ControlPrimary>
         </div>
-        <div class="profile-panel__control-item">
+        <div
+          class="profile-panel__control-item"
+        >
+          <LinkPrimary :link="profilesLink">
+            Go to profiles list
+          </LinkPrimary>
+        </div>
+        <div
+          class="profile-panel__control-item"
+          v-if="getCurrentProfileData.id === getUser.id"
+        >
           <ControlPrimary @click="logout">
             Logout
+          </ControlPrimary>
+        </div>
+        <div
+          class="profile-panel__control-item"
+          v-else
+        >
+          <ControlPrimary @click="logout">
+            Subscribe
           </ControlPrimary>
         </div>
       </div>
@@ -48,13 +69,14 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import { AUTH_ROUT, PROFILE_SETTINGS } from "@/stubs/routes";
+import { AUTH_ROUT, PROFILE_LIST, PROFILE_SETTINGS } from "@/stubs/routes";
 
 export default {
   name: "ProfilePanel",
   data () {
     return {
       dbAppSrc: process.env.VUE_APP_API_URL,
+      profilesLink: PROFILE_LIST,
     }
   },
   mounted () {
@@ -70,7 +92,7 @@ export default {
   methods: {
     ...mapActions([
       'fetchCurrentProfilePerId',
-      "logoutUser"
+      "logoutUser",
     ]),
     goToSettings () {
       this.$router.push(PROFILE_SETTINGS);

@@ -12,7 +12,7 @@
           <div class="post-modal__about">
             <div class="post-modal__profile">
               <div class="post-modal__avatar">
-                <img :src="getPostOwnerProfile ? src + getPostOwnerProfile.img : require('../../assets/images/profile/profile-empty.jpg')" alt="" class="image">
+                <img :src="getPostOwnerProfile && getPostOwnerProfile.img ? src + getPostOwnerProfile.img : require('../../assets/images/profile/profile-empty.jpg')" alt="" class="image">
               </div>
               {{ getPostOwnerProfile && getPostOwnerProfile.login }}
             </div>
@@ -63,8 +63,9 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getPostPerId',
+      'fetchPostPerId',
       'fetchProfilePerPostOwner',
+      'clearCurrentPostState',
       'open'
     ]),
     openModal () {
@@ -73,8 +74,11 @@ export default {
     checkIsOpen () {
       if (this.$route.query.post) {
         this.openModal();
-        this.getPostPerId(this.$route.query.post).then(() => this.fetchProfilePerPostOwner(this.getPost.profileId));
+        this.fetchPostPerId(this.$route.query.post).then(() => this.fetchProfilePerPostOwner(this.getPost.profileId));
         this.isOpen = true;
+      } else if (this.isOpen) {
+        this.isOpen = false;
+        this.clearCurrentPostState();
       }
     }
   },
@@ -114,6 +118,9 @@ export default {
     }
     &__profile {
       font-size: 18px;
+      display: flex;
+      max-width: 70%;
+      align-items: center;
     }
     &__img {
       width: 100%;
@@ -129,6 +136,7 @@ export default {
     &__avatar {
       width: 40px;
       height: 40px;
+      flex: 0 0 40px;
       border-radius: 40px;
       overflow: hidden;
       margin-right: 6px;

@@ -28,6 +28,10 @@ export default {
   mounted () {
     this.getPosts();
   },
+  beforeUnmount () {
+    console.log('unmount');
+    this.clearCurrentProfileState();
+  },
   watch: {
     $route (to, from) {
       if (to.fullPath.includes(PROFILE_ROUT)) { this.getPosts() }
@@ -36,6 +40,8 @@ export default {
   methods: {
     ...mapActions([
       'fetchPostsPerCurrentProfile',
+      'clearCurrentProfileState',
+      'clearPostsState'
     ]),
     getPosts () {
       if (this.$route.params.id || this.getUser.id) {

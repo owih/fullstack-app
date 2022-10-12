@@ -50,7 +50,7 @@
         </div>
         <div class="settings-form__col">
           <div class="settings-form__type">
-            Let people know about ur feelings!
+            Show to anyone ur status today
           </div>
         </div>
       </div>
@@ -64,12 +64,17 @@
         </div>
         <div class="settings-form__col">
           <div class="settings-form__type">
-            Show to anyone ur status today
+            Let people know about ur feelings!
           </div>
         </div>
       </div>
     </div>
     <div class="settings-form__item">
+      <div class="settings-form__control">
+        <LinkPrimary :link="profileLink">
+          Back to profile
+        </LinkPrimary>
+      </div>
       <div class="settings-form__control">
         <ControlPrimary @click="processFormData">
           Save
@@ -81,6 +86,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import { PROFILE_ROUT } from "@/stubs/routes";
 
 export default {
   name: "ProfileSettingsForm",
@@ -92,6 +98,7 @@ export default {
       profileName: '',
       profileStatus: '',
       profileDescription: '',
+      profileLink: PROFILE_ROUT
     }
   },
   mounted () {
@@ -205,7 +212,10 @@ export default {
     }
     &__control {
       display: inline-block;
-      min-width: 200px;
+      min-width: calc(20% - 12px);
+      &:not(:last-child) {
+        margin-right: 12px;
+      }
     }
   }
 </style>
