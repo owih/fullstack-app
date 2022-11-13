@@ -36,7 +36,7 @@ const routes = [
   },
   {
     path: PROFILE_LIST,
-    name: 'ProfilesView',
+    name: 'profiles',
     component: ProfilesView,
   },
 ]

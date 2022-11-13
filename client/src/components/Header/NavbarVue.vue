@@ -14,7 +14,8 @@
             :class="'icon-' + navbarItem.icon"
           ></i>
           <div v-else class="navigation__avatar">
-            <img :src="require('../../assets/images/profile/profile-empty.jpg')" alt="" class="navigation__image">
+            <img v-if="!getUser" :src="require('../../assets/images/profile/profile-empty.jpg')" alt="" class="navigation__image">
+            <img v-else :src="getUserProfile.img ? src + getUserProfile.img : require('../../assets/images/profile/profile-empty.jpg')" alt="" class="navigation__image">
           </div>
         </div>
       </div>
@@ -38,10 +39,15 @@
 
 <script>
 
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "NavbarVue",
+  data () {
+    return {
+      src: process.env.VUE_APP_API_URL,
+    }
+  },
   props: {
     navbarData: {
       type: Array,
@@ -55,8 +61,20 @@ export default {
   computed: {
     ...mapGetters([
       "getIsAuth",
-      "getUser"
+      "getUser",
+      "getUserProfile"
     ])
+  },
+  methods: {
+    ...mapActions([
+      "fetchUserProfilePerId"
+    ]),
+  },
+  mounted () {
+    this.fetchUserProfilePerId(this.getUser.id);
+  },
+  watch: {
+    getUser (val) { if (val) this.fetchUserProfilePerId(this.getUser.id) }
   }
 }
 </script>
@@ -69,6 +87,7 @@ export default {
       display: flex;
       margin: 0 -8px;
       align-items: center;
+      justify-content: end;
     }
     &__col {
       padding: 0 8px;

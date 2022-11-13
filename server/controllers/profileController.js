@@ -1,4 +1,5 @@
-const {Profile} = require('../models/models');
+const { Profile } = require('../models/models');
+const { Op } = require("sequelize");
 const uuid = require("uuid");
 const path = require("path");
 
@@ -11,6 +12,14 @@ class ProfileController {
      const profiles = await Profile.findAndCountAll({limit, offset});
      return res.json(profiles);
   }
+  async getPerName(req, res) {
+    let {limit, page, name} = req.query;
+    page = page || 1;
+    limit = limit || 9;
+    const offset = page * limit - limit;
+    const profiles = await Profile.findAndCountAll({ limit, offset, where: { login: { [Op.substring]: name.trimStart().trimEnd().toLowerCase() } } });
+    return res.json(profiles);
+  }
   async getOne(req, res) {
      const {id} = req.params;
      const profile = await Profile.findOne({ where: {id} });
@@ -18,7 +27,6 @@ class ProfileController {
   }
   async changeProfileData(req, res) {
     const { name, status, description } = req.body;
-    console.log(req.body)
     const {id} = req.params;
     const profile = await Profile.findOne({where: {id}});
 

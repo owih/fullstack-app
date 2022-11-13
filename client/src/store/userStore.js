@@ -46,7 +46,6 @@ export default {
     async loginUser ({ commit }, { email, password }) {
       userLogin(email, password)
         .then((data) => {
-          console.log(data)
           commit('SET_USER', data);
           commit('SET_USER_AUTH');
           router.push('/');

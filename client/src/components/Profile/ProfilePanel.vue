@@ -58,7 +58,7 @@
           class="profile-panel__control-item"
           v-else
         >
-          <ControlPrimary @click="logout">
+          <ControlPrimary :disabled="true" @click="logout">
             Subscribe
           </ControlPrimary>
         </div>
@@ -93,12 +93,14 @@ export default {
     ...mapActions([
       'fetchCurrentProfilePerId',
       "logoutUser",
+      "clearUserProfileState",
     ]),
     goToSettings () {
       this.$router.push(PROFILE_SETTINGS);
     },
     logout () {
       this.logoutUser();
+      this.clearUserProfileState();
       localStorage.removeItem('token');
       this.$router.push(AUTH_ROUT);
     },

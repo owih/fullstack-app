@@ -9,6 +9,7 @@
     "icon": "fantasticon ./src/assets/icons -o ./src/assets/icon-font"
   },
   "dependencies": {
+    "@kyvg/vue3-notification": "^2.6.1",
     "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "fantasticon": "^1.2.3",

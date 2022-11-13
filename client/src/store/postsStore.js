@@ -1,4 +1,5 @@
 import { createPost, fetchPost, fetchPosts } from "@/http/postAPI";
+import { notify } from "@kyvg/vue3-notification";
 
 export default {
   state: () => ({
@@ -44,16 +45,20 @@ export default {
       })
     },
     fetchPostsPerCurrentProfile ({ commit }, profileId) {
-      console.log(profileId)
       fetchPosts({ profileId }).then((posts) => {
-        console.log(posts)
         commit('SET_CURRENT_PROFILE_POSTS', posts.rows);
       })
     },
     createPost ({ commit }, postData) {
       createPost(postData).then((data) => data)
         .then((post) => commit('ADD_NEW_POST', post))
-        .catch((error) => error)
+        .catch((error) => {
+          console.log(error)
+          notify({
+            title: error.message,
+            type: 'error'
+          })
+        })
     },
     async fetchPostPerId ({ commit }, id) {
       return new Promise((resolve, reject) => {
@@ -63,7 +68,6 @@ export default {
             resolve(post);
           })
           .catch((error) => {
-            console.log(error);
             reject(error);
           })
       })

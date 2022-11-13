@@ -29,17 +29,20 @@ export default {
     this.getPosts();
   },
   beforeUnmount () {
-    console.log('unmount');
     this.clearCurrentProfileState();
   },
   watch: {
     $route (to, from) {
-      if (to.fullPath.includes(PROFILE_ROUT)) { this.getPosts() }
+      if (to.fullPath.includes(PROFILE_ROUT)) {
+        this.getPosts()
+        this.fetchCurrentProfilePerId(this.$route.params.id || this.getUser.id);
+      }
     }
   },
   methods: {
     ...mapActions([
       'fetchPostsPerCurrentProfile',
+      'fetchCurrentProfilePerId',
       'clearCurrentProfileState',
       'clearPostsState'
     ]),

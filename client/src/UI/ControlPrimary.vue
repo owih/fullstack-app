@@ -1,12 +1,15 @@
 <template>
-  <button class="button">
+  <button class="button" :class="{'disabled': this.disabled}">
     <slot></slot>
   </button>
 </template>
 
 <script>
 export default {
-  name: "ControlPrimary"
+  name: "ControlPrimary",
+  props: {
+    disabled: Boolean,
+  }
 }
 </script>
 
@@ -26,5 +29,9 @@ export default {
     &:hover {
       background-color: $yellow;
     }
+  }
+  .disabled {
+    pointer-events: none;
+    background-color: darkgray;
   }
 </style>
