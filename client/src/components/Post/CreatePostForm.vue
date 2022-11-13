@@ -1,10 +1,10 @@
 <template>
   <form @submit.prevent="sendPostData" action="#" class="create-post-form">
     <div class="create-post-form__item">
-      <InputField required placeholder="Enter description" v-model="this.postData.description"/>
+      <InputField :required="true" placeholder="Enter description" v-model="this.postData.description"/>
     </div>
     <div class="create-post-form__item">
-      <input required @change="processImageFile" type="file">
+      <input :required="true" @change="processImageFile" type="file">
     </div>
     <div class="create-post-form__item">
       <ControlPrimary type="submit">

@@ -4,6 +4,7 @@
   </label>
   <input
       class="input"
+      :required="required"
       :value="modelValue"
       :placeholder="placeholder"
       @input="updateInput"
@@ -32,6 +33,9 @@ export default {
     type: {
       type: String,
       required: false,
+    },
+    required: {
+      type: Boolean,
     }
   },
   emits: {
