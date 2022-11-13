@@ -1,5 +1,6 @@
 import { userCheck, userLogin, userRegistration } from "@/http/userAPI";
 import router from "@/router";
+import { notify } from "@kyvg/vue3-notification";
 
 export default {
   state: () => ({
@@ -40,8 +41,17 @@ export default {
           commit('SET_USER', data);
           commit('SET_USER_AUTH');
           router.push('/');
+          notify({
+            title: 'User ' + login + ' was created!',
+            type: 'success'
+          })
         })
-        .catch((error) => console.log(error));
+        .catch((e) => {
+          notify({
+            title: e.response.data.message,
+            type: 'error'
+          })
+        })
     },
     async loginUser ({ commit }, { email, password }) {
       userLogin(email, password)
@@ -50,7 +60,12 @@ export default {
           commit('SET_USER_AUTH');
           router.push('/');
         })
-        .catch((error) => console.log(error));
+        .catch((e) => {
+          notify({
+            title: e.response.data.message,
+            type: 'error'
+          })
+        })
     },
     async checkIsAuthorized ({ commit }) {
       userCheck().then((data) => {

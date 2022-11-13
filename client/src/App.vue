@@ -6,6 +6,7 @@
     </main>
     <FooterVue />
   </WrapperVue>
+  <notifications />
 </template>
 
 <script>

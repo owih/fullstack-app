@@ -115,7 +115,8 @@ export default {
   computed: {
     ...mapGetters([
       'getUser',
-      'getCurrentProfileData'
+      'getCurrentProfileData',
+      'getUserProfile',
     ]),
   },
   methods: {
@@ -128,10 +129,10 @@ export default {
     },
     processFormData () {
       const formData = new FormData();
-      formData.append('img', this.profileImage);
-      formData.append('name', this.profileName);
-      formData.append('status', this.profileStatus);
-      formData.append('description', this.profileDescription);
+      this.profileImage && formData.append('img', this.profileImage);
+      this.profileStatus && formData.append('status', this.profileStatus);
+      this.profileName ? formData.append('name', this.profileName) : formData.append('name', this.getUserProfile.login);
+      this.profileDescription && formData.append('description', this.profileDescription);
       const userId = this.getUser.id;
       this.updateProfileData({ userId, formData });
     },

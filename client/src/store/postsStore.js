@@ -9,13 +9,14 @@ export default {
   }),
   getters: {
     getAllPosts (state) {
-      return state.posts;
+      return state.posts.reverse();
     },
+    // TODO: Переделать без создания нового массива
     getCurrentProfilePosts (state) {
-      return state.currentProfilePosts;
+      return state.currentProfilePosts.map((item) => item).reverse();
     },
     getPost (state) {
-      return state.post;
+      return state.posts.map((item) => item).reverse();
     }
   },
   mutations: {
@@ -40,18 +41,38 @@ export default {
   },
   actions: {
     fetchAllPosts ({ commit }, { page, limit }) {
-      fetchPosts({ page, limit }).then((posts) => {
-        commit('SET_ALL_POSTS', posts.rows);
-      })
+      fetchPosts({ page, limit })
+        .then((posts) => {
+          commit('SET_ALL_POSTS', posts.rows);
+        })
+        .catch((e) => {
+          notify({
+            title: e.message,
+            type: 'error'
+          })
+        })
     },
     fetchPostsPerCurrentProfile ({ commit }, profileId) {
-      fetchPosts({ profileId }).then((posts) => {
-        commit('SET_CURRENT_PROFILE_POSTS', posts.rows);
-      })
+      fetchPosts({ profileId })
+        .then((posts) => {
+          commit('SET_CURRENT_PROFILE_POSTS', posts.rows);
+        })
+        .catch((e) => {
+          notify({
+            title: e.message,
+            type: 'error'
+          })
+        })
     },
     createPost ({ commit }, postData) {
       createPost(postData).then((data) => data)
-        .then((post) => commit('ADD_NEW_POST', post))
+        .then((post) => {
+          commit('ADD_NEW_POST', post);
+          notify({
+            title: 'Post created',
+            type: 'success'
+          })
+        })
         .catch((error) => {
           console.log(error)
           notify({
@@ -69,6 +90,10 @@ export default {
           })
           .catch((error) => {
             reject(error);
+            notify({
+              title: error.message,
+              type: 'error'
+            })
           })
       })
     },

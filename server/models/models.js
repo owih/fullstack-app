@@ -31,6 +31,9 @@ const Post = sequelize.define('post', {
   description: {type: DataTypes.STRING},
   likes: {type: DataTypes.INTEGER, defaultValue: 0},
   img: {type: DataTypes.STRING, allowNull: false},
+  profileImg: {type: DataTypes.STRING},
+  profileId: {type: DataTypes.INTEGER, allowNull: false},
+  profileName: {type: DataTypes.STRING, allowNull: false},
 });
 
 const LikeState = sequelize.define('LikeState', {

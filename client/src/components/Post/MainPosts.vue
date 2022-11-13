@@ -34,6 +34,7 @@ export default {
 <style scoped lang="scss">
 .main-posts {
   &__item {
+    max-width: 500px;
     &:not(:last-child) {
       margin-bottom: 32px;
     }

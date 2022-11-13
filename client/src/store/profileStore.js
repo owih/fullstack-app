@@ -1,4 +1,5 @@
 import { putNewProfileData, fetchProfile, fetchProfiles, fetchProfilesPerName } from "@/http/profileAPI";
+import { notify } from "@kyvg/vue3-notification";
 
 export default {
   state: () => ({
@@ -58,8 +59,11 @@ export default {
         .then((data) => {
           commit('SET_CURRENT_PROFILE_DATA', data)
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((e) => {
+          notify({
+            title: e.message,
+            type: 'error'
+          })
         })
     },
     async fetchUserProfilePerId ({ commit }, id) {
@@ -67,8 +71,11 @@ export default {
         .then((data) => {
           commit('SET_USER_PROFILE', data)
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((e) => {
+          notify({
+            title: e.message,
+            type: 'error'
+          })
         })
     },
     async fetchProfilesPerName ({ commit }, { page, limit, name }) {
@@ -78,9 +85,12 @@ export default {
             commit('SET_SEARCHED_PROFILES', data.rows);
             resolve(data.count);
           })
-          .catch((error) => {
-            console.log(error);
-            reject(error);
+          .catch((e) => {
+            notify({
+              title: e.message,
+              type: 'error'
+            })
+            reject(e);
           })
       })
     },
@@ -89,17 +99,27 @@ export default {
         .then((data) => {
           commit('SET_POST_OWNER_DATA', data)
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((e) => {
+          notify({
+            title: e.message,
+            type: 'error'
+          })
         })
     },
     async updateProfileData ({ commit }, { userId, formData }) {
       putNewProfileData(userId, formData)
         .then((data) => {
           commit('SET_CURRENT_PROFILE_DATA', data)
+          notify({
+            title: 'Profile with id: ' + userId + ', successfully updated',
+            type: 'success'
+          })
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((e) => {
+          notify({
+            title: e.message,
+            type: 'error'
+          })
         })
     },
     async fetchAllProfilesList ({ commit }, { page, limit }) {
@@ -109,9 +129,12 @@ export default {
             commit('SET_ALL_PROFILES', data.rows);
             resolve(data.count);
           })
-          .catch((error) => {
-            console.log(error);
-            reject(error);
+          .catch((e) => {
+            notify({
+              title: e.message,
+              type: 'error'
+            })
+            reject(e);
           })
       })
     },

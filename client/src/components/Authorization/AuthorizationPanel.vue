@@ -1,5 +1,5 @@
 <template>
-  <div class="authorization-panel">
+  <form @submit.prevent="sendData" class="authorization-panel">
     <div class="authorization-panel__item">
       <InputField v-model="email" placeholder="Email" />
     </div>
@@ -13,7 +13,7 @@
       />
     </div>
     <div class="authorization-panel__item">
-      <ControlPrimary @click="sendData">
+      <ControlPrimary type="submit">
         {{ isRegistration ? 'Registration' : 'Login' }}
       </ControlPrimary>
     </div>
@@ -25,7 +25,7 @@
         {{ isRegistration ? 'Log in' : 'Sign up' }}
       </a>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>

@@ -36,7 +36,7 @@
 import ModalWrapper from "@/components/Modals/ModalWrapper";
 import PostComments from "@/components/Post/PostComments";
 import { mapActions, mapGetters } from "vuex";
-// TODO: load without image on modal open
+
 export default {
   name: "OpenPostModal",
   data () {
@@ -68,9 +68,7 @@ export default {
       'clearCurrentPostState',
       'open'
     ]),
-    openModal () {
-      this.open(this.id);
-    },
+    openModal () { this.open(this.id) },
     checkIsOpen () {
       if (this.$route.query.post) {
         this.openModal();

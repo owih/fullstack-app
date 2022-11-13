@@ -2,7 +2,14 @@
 <div class="main-post-item">
   <div class="main-post-item__top">
     <div class="main-post-item__row">
-      <router-link class="main-post-item__name" :to="`/profile/${post.profileId}`">Login</router-link>
+      <router-link class="main-post-item__link" :to="`/profile/${post.profileId}`">
+        <div class="main-post-item__avatar-wrapper">
+          <img :src="post.img ? src + post.profileImg : require('@/assets/images/profile/profile-empty.jpg')"
+               alt=""
+               class="main-post-item__avatar">
+        </div>
+        <div class="main-post-item__name">{{ post.profileName }}</div>
+      </router-link>
       <div class="main-post-item__likes">Likes: {{ post.likes }}</div>
     </div>
   </div>
@@ -39,16 +46,19 @@ export default {
     display: flex;
     margin: -8px;
     justify-content: space-between;
+    align-items: center;
   }
   &__top, &__bottom {
     border: 1px solid lightgray;
     padding: 16px;
   }
-  &__name {
+  &__link {
     padding: 8px;
     font-size: 18px;
     text-decoration: none;
     color: $primary;
+    display: flex;
+    align-items: center;
     &:hover {
       color: $yellow;
     }
@@ -65,6 +75,17 @@ export default {
     object-fit: cover;
     width: 100%;
     height: 100%;
+  }
+  &__avatar-wrapper {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+  }
+  &__avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
   }
 }
 </style>

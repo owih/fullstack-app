@@ -10,6 +10,8 @@
         <ProfileListItem :profile="profile"/>
       </div>
     </div>
+    <div class="profile-list__warning" v-if="!this.getSearchedProfiles.length && this.searchQuery">Not found</div>
+    <div class="profile-list__warning" v-if="!this.getAllProfiles.length && !this.searchQuery">Not found any profile</div>
     <div class="profile-list__pagination">
       <PaginationVue
         v-if="count"
@@ -94,6 +96,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "src/assets/styles/variables";
   .profile-list {
     display: flex;
     flex-wrap: wrap;
@@ -104,6 +107,10 @@ export default {
     &__item {
       width: 50%;
       padding: 8px;
+    }
+    &__warning {
+      margin-top: 32px;
+      color: $gray-600;
     }
   }
 </style>

@@ -104,9 +104,7 @@ export default {
       transition: $transition-base;
       cursor: pointer;
       text-decoration: none;
-      &:hover {
-        color: $primary;
-      }
+      &:hover { color: $primary }
     }
     .disabled {
       pointer-events: none;
@@ -119,6 +117,8 @@ export default {
       overflow: hidden;
       img {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
   }

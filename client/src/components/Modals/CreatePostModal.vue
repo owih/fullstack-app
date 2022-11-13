@@ -44,7 +44,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'open'
+      'open',
+      'close'
     ]),
     changeImagePreview (file) {
       if (file) {

@@ -1,10 +1,10 @@
 <template>
   <form @submit.prevent="sendPostData" action="#" class="create-post-form">
     <div class="create-post-form__item">
-      <InputField placeholder="Enter description" v-model="this.postData.description"/>
+      <InputField required placeholder="Enter description" v-model="this.postData.description"/>
     </div>
     <div class="create-post-form__item">
-      <input @change="processImageFile" type="file">
+      <input required @change="processImageFile" type="file">
     </div>
     <div class="create-post-form__item">
       <ControlPrimary type="submit">
@@ -30,8 +30,8 @@ export default {
   },
   emits: {
     changeImagePreview: {
-      type: File
-    }
+      type: File || null,
+    },
   },
   mounted () {
     this.postData.profileId = this.getUser.id;
@@ -53,6 +53,7 @@ export default {
       const formData = this.createPostFormData();
       this.createPost(formData);
       this.clearData();
+      this.$emit('changeImagePreview', null);
     },
     createPostFormData () {
       const formData = new FormData();
@@ -65,8 +66,10 @@ export default {
       this.postData.description = '';
       this.postData.img = null;
       this.postData.profileId = null;
+      this.$emit('changeImagePreview', null);
     }
   },
+  unmounted () { this.clearData() }
 }
 </script>
 
