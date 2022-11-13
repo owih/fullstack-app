@@ -8,15 +8,15 @@ export default {
     post: {},
   }),
   getters: {
-    getAllPosts (state) {
-      return state.posts.reverse();
-    },
     // TODO: Переделать без создания нового массива
+    getAllPosts (state) {
+      return state.posts.map((item) => item).reverse()
+    },
     getCurrentProfilePosts (state) {
       return state.currentProfilePosts.map((item) => item).reverse();
     },
     getPost (state) {
-      return state.posts.map((item) => item).reverse();
+      return state.post;
     }
   },
   mutations: {
