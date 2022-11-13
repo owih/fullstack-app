@@ -5,8 +5,10 @@
            v-for="navbarItem in navbarDataAuth"
            :key="navbarItem.name"
       >
-        <div class="navigation__item"
-             @click="this.$router.push(navbarItem.name === 'profile' && getIsAuth ? navbarItem.link + '/' + getUser.id : navbarItem.link)"
+        <router-link
+          class="navigation__item"
+          :to="navbarItem.name === 'profile' && getIsAuth ? navbarItem.link + '/' + getUser.id : navbarItem.link"
+          :class="{'disabled': navbarItem.disabled}"
         >
           <i
             v-if="navbarItem.name !== 'profile'"
@@ -17,21 +19,23 @@
             <img v-if="!getUser" :src="require('../../assets/images/profile/profile-empty.jpg')" alt="" class="navigation__image">
             <img v-else :src="getUserProfile.img ? src + getUserProfile.img : require('../../assets/images/profile/profile-empty.jpg')" alt="" class="navigation__image">
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
     <div class="navigation__row" v-else>
       <div class="navigation__col"
            v-for="navbarItem in navbarData" :key="navbarItem.name"
       >
-        <div class="navigation__item"
-             @click="this.$router.push(navbarItem.link)"
+        <router-link
+          class="navigation__item"
+          :to="navbarItem.link"
+          :class="{'disabled': navbarItem.disabled}"
         >
           <i
             class="icon"
             :class="'icon-' + navbarItem.icon"
           ></i>
-        </div>
+        </router-link>
       </div>
     </div>
   </nav>
@@ -99,9 +103,14 @@ export default {
       font-size: 22px;
       transition: $transition-base;
       cursor: pointer;
+      text-decoration: none;
       &:hover {
         color: $primary;
       }
+    }
+    .disabled {
+      pointer-events: none;
+      color: darkgray;
     }
     &__avatar {
       width: 32px;

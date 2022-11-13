@@ -56,7 +56,6 @@ export default {
     async fetchCurrentProfilePerId ({ commit }, id) {
       fetchProfile(id)
         .then((data) => {
-          console.log(data)
           commit('SET_CURRENT_PROFILE_DATA', data)
         })
         .catch((error) => {

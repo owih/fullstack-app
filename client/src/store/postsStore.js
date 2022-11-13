@@ -39,8 +39,8 @@ export default {
     }
   },
   actions: {
-    fetchAllPosts ({ commit }) {
-      fetchPosts().then((posts) => {
+    fetchAllPosts ({ commit }, { page, limit }) {
+      fetchPosts({ page, limit }).then((posts) => {
         commit('SET_ALL_POSTS', posts.rows);
       })
     },

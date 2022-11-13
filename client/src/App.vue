@@ -4,12 +4,14 @@
     <main class="main">
       <router-view/>
     </main>
+    <FooterVue />
   </WrapperVue>
 </template>
 
 <script>
 import HeaderVue from '@/components/Header/HeaderVue';
 import WrapperVue from "@/components/Wrapper/WrapperVue";
+import FooterVue from "@/components/Footer/FooterVue";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -22,6 +24,7 @@ export default {
   components: {
     HeaderVue,
     WrapperVue,
+    FooterVue,
   },
   beforeMount () {
     this.checkIsAuthorized()

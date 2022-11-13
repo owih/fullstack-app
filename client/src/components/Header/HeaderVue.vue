@@ -45,17 +45,20 @@ export default {
           link: PROFILE_ROUT,
           name: 'messenger',
           authorized: true,
+          disabled: true,
         },
         {
           icon: 'fire',
           link: PROFILE_ROUT,
-          name: 'recommendations'
+          name: 'recommendations',
+          disabled: true,
         },
         {
           icon: 'home',
           link: PROFILE_ROUT,
           name: 'favorites',
           authorized: true,
+          disabled: true,
         },
         {
           icon: 'user',
@@ -72,7 +75,8 @@ export default {
         {
           icon: 'fire',
           link: PROFILE_ROUT,
-          name: 'recommendations'
+          name: 'recommendations',
+          disabled: true,
         },
         {
           icon: 'user',
