@@ -74,7 +74,6 @@ export default {
           })
         })
         .catch((error) => {
-          console.log(error)
           notify({
             title: error.message,
             type: 'error'

@@ -72,9 +72,8 @@ export default {
         commit('SET_USER', data);
         commit('SET_USER_AUTH');
       })
-        .catch((error) => {
+        .catch(() => {
           commit('LOGOUT_USER');
-          console.log(error.response.data.message)
         })
         .finally(() => commit('LOAD_IS_ENDED'));
     },

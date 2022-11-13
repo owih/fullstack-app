@@ -13,7 +13,6 @@ class PostController {
       img.mv(path.resolve(__dirname, '..', 'static', fileName));
 
       const profile = await Profile.findOne({ where: { id: profileId } });
-      console.log(profile);
       const post = await Post.create({ description, img: fileName, profileId, profileName: profile.dataValues.login, profileImg: profile.dataValues.img });
       return res.json(post);
     } catch(error) {
