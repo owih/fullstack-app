@@ -61,7 +61,13 @@ export default {
 
 <style scoped lang="scss">
 @import "../../assets/styles/variables";
+@import "src/assets/styles/mixins";
   .posts-list {
+    max-width: 300px;
+    margin: 0 auto;
+    @include media-breakpoint-up(md) {
+      max-width: none;
+    }
     &__create {
       background-color: $gray-100;
       height: 100%;
@@ -90,8 +96,14 @@ export default {
     }
     &__col {
       padding: 12px;
-      flex: 0 0 33.33333%;
       height: 300px;
+      flex: 0 0 100%;
+      @include media-breakpoint-up(md) {
+        flex: 0 0 50%;
+      }
+      @include media-breakpoint-up(lg) {
+        flex: 0 0 33.33333%;
+      }
     }
   }
 </style>

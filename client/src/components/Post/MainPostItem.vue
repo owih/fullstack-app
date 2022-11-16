@@ -41,7 +41,12 @@ export default {
 
 <style scoped lang="scss">
 @import "src/assets/styles/variables";
+@import "src/assets/styles/mixins";
 .main-post-item {
+  max-width: 300px;
+  @include media-breakpoint-up(md) {
+    max-width: 500px;
+  }
   &__row {
     display: flex;
     margin: -8px;
@@ -68,8 +73,12 @@ export default {
     font-size: 18px;
   }
   &__image-wrapper {
-    width: 500px;
-    height: 500px;
+    width: 300px;
+    height: 300px;
+    @include media-breakpoint-up(md) {
+      width: 500px;
+      height: 500px;
+    }
   }
   &__image {
     object-fit: cover;

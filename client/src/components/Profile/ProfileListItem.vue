@@ -48,6 +48,7 @@ export default {
 
 <style scoped lang="scss">
 @import "src/assets/styles/variables";
+@import "src/assets/styles/mixins";
   .profile-list-item {
     border: 1px solid $gray-400;
     padding: 16px;
@@ -57,7 +58,7 @@ export default {
     display: block;
     transition: $transition-base;
     &:hover {
-      box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+      box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
       .profile-list-item__info {
         color: $primary;
       }
@@ -70,7 +71,7 @@ export default {
       margin-right: 16px;
     }
     &__right {
-      flex: 1 0 auto;
+      flex: 1 0;
       font-size: 16px;
     }
     &__info {

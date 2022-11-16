@@ -60,15 +60,21 @@ export default {
 
 <style scoped lang="scss">
 @import "../../assets/styles/variables";
+@import "src/assets/styles/mixins";
 .create-post-modal {
   height: 100%;
   &__row {
     display: flex;
     height: 100%;
+    flex-wrap: wrap;
   }
   &__left {
-    flex: 0 0 540px;
-    height: 540px;
+    flex: 0 0 400px;
+    height: 400px;
+    @include media-breakpoint-up(md) {
+      flex: 0 0 540px;
+      height: 540px;
+    }
   }
   &__right {
     flex: 1 0 auto;
@@ -88,8 +94,11 @@ export default {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: 32px;
+    font-size: 22px;
     color: $gray-500;
+    @include media-breakpoint-up(md) {
+      font-size: 32px;
+    }
   }
   &__title {
     font-size: 20px;

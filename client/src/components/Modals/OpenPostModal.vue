@@ -91,13 +91,18 @@ export default {
 
 <style scoped lang="scss">
 @import "src/assets/styles/variables";
+@import "src/assets/styles/mixins";
   .post-modal {
     &__row {
       display: flex;
+      flex-direction: column;
+      @include media-breakpoint-up(md) {
+        flex-direction: row;
+      }
     }
     &__left {
-      flex: 0 0 540px;
-      height: 540px;
+      flex: 0 1 400px;
+      height: 400px;
       position: relative;
       &:before {
         content: 'Post picture';
@@ -107,6 +112,10 @@ export default {
         transform: translate(-50%, -50%);
         font-size: 22px;
         color: lightgray;
+      }
+      @include media-breakpoint-up(md) {
+        flex: 0 0 540px;
+        height: 540px;
       }
     }
     &__right {

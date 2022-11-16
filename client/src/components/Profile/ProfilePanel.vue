@@ -109,16 +109,25 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../assets/styles/variables";
+  @import "src/assets/styles/variables";
+  @import "src/assets/styles/mixins";
   .profile-panel {
     text-align: left;
     &__row {
       display: flex;
       margin: -8px;
+      flex-wrap: wrap;
+      align-items: center;
     }
     &__left {
       padding: 8px;
-      flex: 0 0 33.33333%;
+      flex: 0 0 100%;
+      @include media-breakpoint-up(sm) {
+        flex: 0 0 50%;
+      }
+      @include media-breakpoint-up(lg) {
+        flex: 0 0 33.33333%;
+      }
     }
     &__image-wrapper {
       text-align: center;
@@ -132,19 +141,42 @@ export default {
     }
     &__center {
       padding: 8px;
-      flex: 0 0 33.3333%;
+      flex: 0 0 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      @include media-breakpoint-up(sm) {
+        margin: 0;
+        flex: 0 0 50%;
+        max-width: none;
+      }
+      @include media-breakpoint-up(md) {
+        flex: 0 0 33.33333%;
+      }
     }
     &__right {
       padding: 8px;
-      flex: 0 0 33.3333%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      flex: 0 0 100%;
+      @include media-breakpoint-up(sm) {
+        flex: 0 0 50%;
+        margin: 24px auto 0;
+      }
+      @include media-breakpoint-up(lg) {
+        margin: 0;
+        justify-content: center;
+        flex: 0 0 33.33333%;
+      }
     }
     &__right & {
       &__control-item {
-        width: 50%;
+        max-width: 300px;
+        width: 100%;
+        @include media-breakpoint-up(lg) {
+          width: 50%;
+        }
       }
     }
     &__header {

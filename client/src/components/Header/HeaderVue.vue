@@ -104,6 +104,7 @@ export default {
 
 <style scoped lang="scss">
 @import "../../assets/styles/variables";
+@import "src/assets/styles/mixins";
   .header {
     padding: 16px 0;
     border-bottom: 1px solid #e6e6e6;
@@ -112,6 +113,10 @@ export default {
       justify-content: space-between;
       margin: 0 -8px;
       align-items: center;
+      flex-wrap: wrap;
+      @include media-breakpoint-up(md) {
+        flex-wrap: nowrap;
+      }
     }
     &__logo-wrapper,
     &__navbar-wrapper,
@@ -124,8 +129,16 @@ export default {
     }
     &__search-wrapper {
       position: relative;
-      display: flex;
       justify-content: space-between;
+      display: flex;
+      order: 1;
+      flex: 0 0 100%;
+      margin-top: 18px;
+      @include media-breakpoint-up(md) {
+        margin-top: 0;
+        order: unset;
+        flex: 0 0 33.33333%;
+      }
     }
     &__search-label {
       position: absolute;

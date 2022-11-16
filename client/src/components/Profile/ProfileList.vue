@@ -97,6 +97,7 @@ export default {
 
 <style scoped lang="scss">
 @import "src/assets/styles/variables";
+@import "src/assets/styles/mixins";
   .profile-list {
     display: flex;
     flex-wrap: wrap;
@@ -105,8 +106,11 @@ export default {
       margin-top: 32px;
     }
     &__item {
-      width: 50%;
+      flex: 0 0 100%;
       padding: 8px;
+      @include media-breakpoint-up(md) {
+        flex: 0 0 50%;
+      }
     }
     &__warning {
       margin-top: 32px;

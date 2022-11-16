@@ -22,6 +22,7 @@ export default {
 
 <style scoped lang="scss">
   .profiles {
+    padding: 16px 0 32px;
     &__title {
       margin-bottom: 40px;
     }

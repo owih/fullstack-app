@@ -43,6 +43,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "src/assets/styles/variables";
+@import "src/assets/styles/mixins";
 *:focus {
   outline: none;
 }
@@ -63,12 +65,15 @@ export default {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   padding: 12px;
   transition: all 0.3s ease;
-  max-width: 900px;
+  max-width: 400px;
   width: 100%;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  @include media-breakpoint-up(md) {
+    max-width: 900px;
+  }
 }
 .modal-wrapper button {
   border: none;
@@ -78,6 +83,7 @@ export default {
   position: absolute;
   right: 16px;
   top: 16px;
+  z-index: 1;
   .icon {
     transform: rotate(45deg);
     font-size: 18px;
