@@ -1,4 +1,29 @@
+# server
+
+## database
+Create database and write this one data to .env file
+
+## Go to server folder
+```
+cd server
+```
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run dev
+```
+
 # client
+
+## Go to client folder
+```
+cd client
+```
 
 ## Project setup
 ```
