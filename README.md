@@ -1,8 +1,6 @@
 # fullstack-app
 <h1>Server side init</h1>
 
-# Server
-
 ## database
 Create database and write this one data to .env file
 
@@ -20,8 +18,7 @@ npm install
 ```
 npm run dev
 ```
-
-# Client
+<h1>Client side init</h1>
 
 ## Go to client folder
 ```
