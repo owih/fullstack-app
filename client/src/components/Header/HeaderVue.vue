@@ -20,6 +20,14 @@
           </div>
         </div>
       </div>
+      <br>
+      <div>MVP TODOS</div>
+      <ul>
+        <li>Add forms validation</li>
+        <li>Fix get error behavior on open post modal</li>
+        <li>Refactoring route push/watch behaviors</li>
+        <li>Refactoring modal design/behavior</li>
+      </ul>
     </div>
   </header>
 </template>

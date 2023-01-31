@@ -71,6 +71,10 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  @include media-breakpoint-down(md) {
+    max-height: 100vh;
+    overflow: auto;
+  }
   @include media-breakpoint-up(md) {
     max-width: 900px;
   }

@@ -48,7 +48,7 @@ export default {
         })
         .catch((e) => {
           notify({
-            title: e.response.data.message,
+            title: e.response ? e.response.data.message : e,
             type: 'error'
           })
         })
@@ -62,7 +62,7 @@ export default {
         })
         .catch((e) => {
           notify({
-            title: e.response.data.message,
+            title: e.response ? e.response.data.message : e,
             type: 'error'
           })
         })

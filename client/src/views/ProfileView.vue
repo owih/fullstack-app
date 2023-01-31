@@ -4,6 +4,10 @@
       <div v-if="!this.getCurrentProfileData" class="profile__error">
         Profile not found...
       </div>
+      <div v-if="this.requestError" class="profile__error">
+        "{{ requestError }}" is not an id ;(
+        Try /profile/1
+      </div>
       <div v-else>
         <div :class="$style.panel">
           <ProfilePanel />
@@ -22,6 +26,11 @@ import ProfilePanel from "@/components/Profile/ProfilePanel";
 
 export default {
   name: "ProfileView",
+  data () {
+    return {
+      requestError: '',
+    }
+  },
   components: {
     PostsList, ProfilePanel
   },
@@ -33,7 +42,7 @@ export default {
   },
   watch: {
     $route (to, from) {
-      if (to.fullPath.includes(PROFILE_ROUT)) {
+      if (to.fullPath.includes(PROFILE_ROUT) && to.params.id !== from.params.id) {
         this.getPosts()
         this.fetchCurrentProfilePerId(this.$route.params.id || this.getUser.id);
       }
@@ -48,7 +57,12 @@ export default {
     ]),
     getPosts () {
       if (this.$route.params.id || this.getUser.id) {
-        this.fetchPostsPerCurrentProfile(this.$route.params.id || this.getUser.id);
+        if (!Number(this.$route.params.id)) {
+          this.requestError = this.$route.params.id;
+        } else {
+          this.requestError = '';
+          this.fetchPostsPerCurrentProfile(this.$route.params.id || this.getUser.id);
+        }
       } else {
         this.$router.push(AUTH_ROUT);
       }

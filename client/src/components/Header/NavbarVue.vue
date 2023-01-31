@@ -75,7 +75,7 @@ export default {
     ]),
   },
   mounted () {
-    this.fetchUserProfilePerId(this.getUser.id);
+    this.getUser.id && this.fetchUserProfilePerId(this.getUser.id);
   },
   watch: {
     getUser (val) { if (val) this.fetchUserProfilePerId(this.getUser.id) }
