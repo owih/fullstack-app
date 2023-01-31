@@ -14,6 +14,17 @@ cd server
 npm install
 ```
 
+## Set .env
+```
+PORT=5000
+DB_NAME=postgres
+DB_USER=postgres
+DB_PASSWORD=owih-fullstack-app
+DB_HOST=db.ruuijkllzxjcucgwjfti.supabase.co
+DB_PORT=5432
+SECRET_KEY=SECRET_USER_KEY
+```
+
 ### Compiles and hot-reloads for development
 ```
 npm run dev
