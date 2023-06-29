@@ -10,7 +10,7 @@ class PostController {
       const {link, description, profileId} = req.body;
       const {img} = req.files;
       const fileName = uuid.v4() + '.jpg';
-      img.mv(path.resolve(__dirname, '..', 'static', fileName));
+      img.mv(path.resolve(__dirname, '..', 'public', fileName));
 
       const profile = await Profile.findOne({ where: { id: profileId } });
       const post = await Post.create({ description, link, img: fileName, profileId, profileName: profile.dataValues.login, profileImg: profile.dataValues.img });
