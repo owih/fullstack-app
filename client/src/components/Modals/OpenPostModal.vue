@@ -20,12 +20,9 @@
           <div class="post-modal__description">
             {{ getPost.description }}
           </div>
-          <div class="post-modal__likes">
-            <strong>{{ getPost.likes }}</strong> likes
-          </div>
-          <div class="post-modal__comments">
-            <PostComments />
-          </div>
+          <LinkPrimary :linkHref="getPost.link">
+            Go to resource
+          </LinkPrimary>
         </div>
       </div>
     </div>
@@ -33,12 +30,12 @@
 </template>
 
 <script>
-import ModalWrapper from "@/components/Modals/ModalWrapper";
-import PostComments from "@/components/Post/PostComments";
-import { mapActions, mapGetters } from "vuex";
+import ModalWrapper from '@/components/Modals/ModalWrapper';
+import { mapActions, mapGetters } from 'vuex';
+import LinkPrimary from '@/UI/LinkPrimary.vue';
 
 export default {
-  name: "OpenPostModal",
+  name: 'OpenPostModal',
   data () {
     return {
       src: process.env.VUE_APP_API_URL,
@@ -46,8 +43,8 @@ export default {
     }
   },
   components: {
+    LinkPrimary,
     ModalWrapper,
-    PostComments,
   },
   props: {
     id: {
@@ -121,6 +118,7 @@ export default {
     &__right {
       padding: 16px;
       display: flex;
+      flex-grow: 1;
       flex-direction: column;
     }
     &__profile {

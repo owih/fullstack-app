@@ -1,5 +1,5 @@
-import { putNewProfileData, fetchProfile, fetchProfiles, fetchProfilesPerName } from "@/http/profileAPI";
-import { notify } from "@kyvg/vue3-notification";
+import { putNewProfileData, fetchProfile, fetchProfiles, fetchProfilesPerName } from '@/http/profileAPI';
+import { notify } from '@kyvg/vue3-notification';
 
 export default {
   state: () => ({
@@ -51,9 +51,17 @@ export default {
     CLEAR_PROFILES (state) {
       state.profiles = [];
       state.searchedProfiles = [];
-    }
+    },
+    CLEAR_PROFILES_STATE (state) {
+      state.currentProfile = {};
+      state.postOwnerProfile = {};
+      state.userProfile = {};
+    },
   },
   actions: {
+    clearProfileState ({ commit }) {
+      commit('CLEAR_PROFILES_STATE');
+    },
     async fetchCurrentProfilePerId ({ commit }, id) {
       fetchProfile(id)
         .then((data) => {

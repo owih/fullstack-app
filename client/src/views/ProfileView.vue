@@ -19,13 +19,13 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import { AUTH_ROUT, PROFILE_ROUT } from "@/stubs/routes";
-import PostsList from "@/components/Profile/PostsList";
-import ProfilePanel from "@/components/Profile/ProfilePanel";
+import { mapActions, mapGetters } from 'vuex';
+import { AUTH_ROUT, PROFILE_ROUT } from '@/stubs/routes';
+import PostsList from '@/components/Profile/PostsList';
+import ProfilePanel from '@/components/Profile/ProfilePanel';
 
 export default {
-  name: "ProfileView",
+  name: 'ProfileView',
   data () {
     return {
       requestError: '',
@@ -37,8 +37,9 @@ export default {
   mounted () {
     this.getPosts();
   },
-  beforeUnmount () {
-    this.clearCurrentProfileState();
+  unmounted () {
+    this.clearProfileState();
+    this.clearPostsState();
   },
   watch: {
     $route (to, from) {
@@ -53,7 +54,8 @@ export default {
       'fetchPostsPerCurrentProfile',
       'fetchCurrentProfilePerId',
       'clearCurrentProfileState',
-      'clearPostsState'
+      'clearPostsState',
+      'clearProfileState',
     ]),
     getPosts () {
       if (this.$route.params.id || this.getUser.id) {

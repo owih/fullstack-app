@@ -18,12 +18,6 @@
           <div class="profile-panel__statistic-item">
             <strong>{{ getCurrentProfilePosts ? getCurrentProfilePosts.length : 0 }}</strong> posts
           </div>
-          <div class="profile-panel__statistic-item">
-            <strong>0</strong> followers
-          </div>
-          <div class="profile-panel__statistic-item">
-            <strong>13</strong> following
-          </div>
         </div>
         <div class="profile-panel__about">
           <div><strong>{{ getCurrentProfileData && getCurrentProfileData.status }}</strong></div>
@@ -58,9 +52,6 @@
           class="profile-panel__control-item"
           v-else
         >
-          <ControlPrimary :disabled="true" @click="logout">
-            Subscribe
-          </ControlPrimary>
         </div>
       </div>
     </div>
@@ -68,11 +59,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import { AUTH_ROUT, PROFILE_LIST, PROFILE_SETTINGS } from "@/stubs/routes";
+import { mapActions, mapGetters } from 'vuex';
+import { AUTH_ROUT, PROFILE_LIST, PROFILE_SETTINGS } from '@/stubs/routes';
 
 export default {
-  name: "ProfilePanel",
+  name: 'ProfilePanel',
   data () {
     return {
       dbAppSrc: process.env.VUE_APP_API_URL,
@@ -92,8 +83,8 @@ export default {
   methods: {
     ...mapActions([
       'fetchCurrentProfilePerId',
-      "logoutUser",
-      "clearUserProfileState",
+      'logoutUser',
+      'clearUserProfileState',
     ]),
     goToSettings () {
       this.$router.push(PROFILE_SETTINGS);

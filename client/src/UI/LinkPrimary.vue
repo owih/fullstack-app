@@ -1,16 +1,29 @@
 <template>
-  <router-link :to="link" class="link">
+  <router-link
+    v-if="link"
+    :to="link" class="link">
     <slot></slot>
   </router-link>
+  <a
+    v-if="linkHref"
+    :href="linkHref"
+    target="_blank"
+    class="link">
+    <slot></slot>
+  </a>
 </template>
 
 <script>
 export default {
-  name: "LinkPrimary",
+  name: 'LinkPrimary',
   props: {
     link: {
       type: String,
-      required: true,
+      default: '',
+    },
+    linkHref: {
+      type: String,
+      default: '',
     }
   }
 }

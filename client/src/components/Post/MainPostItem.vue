@@ -4,13 +4,17 @@
     <div class="main-post-item__row">
       <router-link class="main-post-item__link" :to="`/profile/${post.profileId}`">
         <div class="main-post-item__avatar-wrapper">
-          <img :src="post.img ? src + post.profileImg : require('@/assets/images/profile/profile-empty.jpg')"
+          <img :src="post.profileImg ? src + post.profileImg : require('@/assets/images/profile/profile-empty.jpg')"
                alt=""
                class="main-post-item__avatar">
         </div>
         <div class="main-post-item__name">{{ post.profileName }}</div>
       </router-link>
-      <div class="main-post-item__likes">Likes: {{ post.likes }}</div>
+      <div class="main-post-item__likes">
+        <LinkPrimary :link-href="post.link">
+          Resource
+        </LinkPrimary>
+      </div>
     </div>
   </div>
   <div class="main-post-item__image-wrapper">
@@ -23,8 +27,11 @@
 </template>
 
 <script>
+import LinkPrimary from '@/UI/LinkPrimary.vue';
+
 export default {
-  name: "MainPostItem",
+  name: 'MainPostItem',
+  components: { LinkPrimary },
   data () {
     return {
       src: process.env.VUE_APP_API_URL,

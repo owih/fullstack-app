@@ -5,7 +5,7 @@
         <div class="header__row">
           <div class="header__logo-wrapper">
             <div class="header__logo">
-              <router-link class="text-link" to="/">Example</router-link>
+              <router-link class="text-link" to="/">VSPU</router-link>
             </div>
           </div>
           <div class="header__search-wrapper">
@@ -20,14 +20,6 @@
           </div>
         </div>
       </div>
-      <br>
-      <div>MVP TODOS</div>
-      <ul>
-        <li>Add forms validation</li>
-        <li>Fix get error behavior on open post modal</li>
-        <li>Refactoring route push/watch behaviors</li>
-        <li>Refactoring modal design/behavior</li>
-      </ul>
     </div>
   </header>
 </template>

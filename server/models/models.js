@@ -16,29 +16,15 @@ const Profile = sequelize.define('profile', {
   status: {type: DataTypes.STRING},
 });
 
-const Subscribe = sequelize.define('subscribe', {
-   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-   subscriber_id: {type: DataTypes.INTEGER},
-   subscribe_object_id: {type: DataTypes.INTEGER},
-});
-
-const ProfileSubscribes = sequelize.define('profile_subscribes', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-})
-
 const Post = sequelize.define('post', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   description: {type: DataTypes.STRING},
+  link: {type: DataTypes.STRING},
   likes: {type: DataTypes.INTEGER, defaultValue: 0},
   img: {type: DataTypes.STRING, allowNull: false},
   profileImg: {type: DataTypes.STRING},
   profileId: {type: DataTypes.INTEGER, allowNull: false},
   profileName: {type: DataTypes.STRING, allowNull: false},
-});
-
-const LikeState = sequelize.define('LikeState', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-  isLiked: {type: DataTypes.BOOLEAN, defaultValue: false},
 });
 
 // Many to many example
@@ -51,21 +37,11 @@ const LikeState = sequelize.define('LikeState', {
 User.hasOne(Profile);
 Profile.belongsTo(User);
 
-User.hasMany(LikeState);
-LikeState.belongsTo(User);
-
 Profile.hasMany(Post);
 Post.belongsTo(Profile);
-
-Profile.belongsToMany(Subscribe, {through: ProfileSubscribes});
-Subscribe.belongsToMany(Profile, {through: ProfileSubscribes});
-
-Post.hasMany(LikeState);
-LikeState.belongsTo(Post);
 
 module.exports = {
   User,
   Profile,
   Post,
-  LikeState,
 }

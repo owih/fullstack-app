@@ -1,7 +1,10 @@
 <template>
   <form @submit.prevent="sendPostData" action="#" class="create-post-form">
     <div class="create-post-form__item">
-      <InputField :required="true" placeholder="Enter description" v-model="this.postData.description"/>
+      <TextareaField :required="true" placeholder="Enter description" v-model="this.postData.description"/>
+    </div>
+    <div class="create-post-form__item">
+      <InputField :required="true" placeholder="Enter link" v-model="this.postData.link"/>
     </div>
     <div class="create-post-form__item">
       <input :required="true" @change="processImageFile" type="file">
@@ -15,14 +18,17 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
+import InputField from '@/UI/InputField.vue';
 
 export default {
-  name: "CreatePostForm",
+  name: 'CreatePostForm',
+  components: { InputField },
   data () {
     return {
       postData: {
         description: '',
+        link: '',
         img: null,
         profileId: null,
       }
@@ -57,6 +63,7 @@ export default {
     },
     createPostFormData () {
       const formData = new FormData();
+      formData.append('link', this.postData.link);
       formData.append('description', this.postData.description);
       formData.append('img', this.postData.img);
       formData.append('profileId', this.postData.profileId);

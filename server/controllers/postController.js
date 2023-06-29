@@ -7,13 +7,13 @@ const ApiError = require('../error/ApiError');
 class PostController {
   async create(req, res, next) {
     try {
-      const {description, profileId} = req.body;
+      const {link, description, profileId} = req.body;
       const {img} = req.files;
       const fileName = uuid.v4() + '.jpg';
       img.mv(path.resolve(__dirname, '..', 'static', fileName));
 
       const profile = await Profile.findOne({ where: { id: profileId } });
-      const post = await Post.create({ description, img: fileName, profileId, profileName: profile.dataValues.login, profileImg: profile.dataValues.img });
+      const post = await Post.create({ description, link, img: fileName, profileId, profileName: profile.dataValues.login, profileImg: profile.dataValues.img });
       return res.json(post);
     } catch(error) {
       next(ApiError.badRequest(error.message));
