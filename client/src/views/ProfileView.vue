@@ -8,7 +8,7 @@
         "{{ requestError }}" is not an id ;(
         Try /profile/1
       </div>
-      <div v-else>
+      <div v-else-if="!this.requestError && this.getCurrentProfileData">
         <div :class="$style.panel">
           <ProfilePanel />
         </div>
@@ -58,15 +58,16 @@ export default {
       'clearProfileState',
     ]),
     getPosts () {
-      if (this.$route.params.id || this.getUser.id) {
-        if (!Number(this.$route.params.id)) {
-          this.requestError = this.$route.params.id;
-        } else {
-          this.requestError = '';
-          this.fetchPostsPerCurrentProfile(this.$route.params.id || this.getUser.id);
-        }
-      } else {
+      if (this.getUser.id && !Number(this.$route.params.id)) {
+        this.$router.push(PROFILE_ROUT + '/' + this.getUser.id);
+      }
+
+      if (!this.getUser.id && !Number(this.$route.params.id)) {
         this.$router.push(AUTH_ROUT);
+      }
+
+      if (this.$route.params.id) {
+        this.fetchPostsPerCurrentProfile(this.$route.params.id || this.getUser.id);
       }
     }
   },

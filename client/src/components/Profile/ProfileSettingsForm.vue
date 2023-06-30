@@ -85,11 +85,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import { PROFILE_ROUT } from "@/stubs/routes";
+import { mapActions, mapGetters } from 'vuex';
+import { PROFILE_ROUT } from '@/stubs/routes';
 
 export default {
-  name: "ProfileSettingsForm",
+  name: 'ProfileSettingsForm',
   data () {
     return {
       dbAppSrc: process.env.VUE_APP_API_URL,

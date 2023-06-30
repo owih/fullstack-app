@@ -63,6 +63,7 @@ export default {
       commit('CLEAR_PROFILES_STATE');
     },
     async fetchCurrentProfilePerId ({ commit }, id) {
+      if (!id) return;
       fetchProfile(id)
         .then((data) => {
           commit('SET_CURRENT_PROFILE_DATA', data)
@@ -75,6 +76,7 @@ export default {
         })
     },
     async fetchUserProfilePerId ({ commit }, id) {
+      if (!id) return;
       fetchProfile(id)
         .then((data) => {
           commit('SET_USER_PROFILE', data)
