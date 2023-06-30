@@ -20,6 +20,9 @@ app.use('/api', router);
 // error handler - last middleware
 app.use(errorHandler);
 
+app.get('/api/item/', (req, res) => {
+  res.end(`Item`);
+});
 
 const start = async () => {
   try {
