@@ -26,12 +26,13 @@ app.get('/api/item/', (req, res) => {
 
 const start = async () => {
   try {
-    await sequelize.authenticate();
-    await sequelize.sync();
     app.listen(PORT, () => console.log('server started'))
   } catch (error) {
     console.log(error);
   }
 }
 
-module.exports = start;
+await sequelize.authenticate();
+await sequelize.sync();
+
+module.exports = app;
