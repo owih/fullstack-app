@@ -164,7 +164,8 @@ export default {
       overflow: auto;
     }
     &__description {
-      flex: 0 1 30px;
+      flex: 1 1 30px;
+      margin-bottom: 20px;
     }
   }
 </style>
