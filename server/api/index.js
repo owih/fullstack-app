@@ -20,19 +20,15 @@ app.use('/api', router);
 // error handler - last middleware
 app.use(errorHandler);
 
-app.get('/api/item/', (req, res) => {
-  res.end(`Item`);
-});
-
 const start = async () => {
   try {
+    await sequelize.authenticate();
+    await sequelize.sync();
     app.listen(PORT, () => console.log('server started'))
   } catch (error) {
     console.log(error);
   }
 }
+start();
 
-// await sequelize.authenticate();
-// await sequelize.sync();
-
-module.exports = app;
+module.exports = start;
