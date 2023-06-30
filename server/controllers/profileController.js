@@ -49,7 +49,7 @@ class ProfileController {
       if (req.files) {
         const { img } = req.files;
         const fileName = uuid.v4() + '.jpg';
-        img.mv(path.resolve(__dirname, '..', 'static', fileName));
+        img.mv(path.resolve(__dirname, '..', 'public', fileName));
         await profile.update({ name, description, status, img: fileName });
         await profile.save();
         return res.json(profile);
