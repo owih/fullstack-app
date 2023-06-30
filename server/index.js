@@ -30,5 +30,4 @@ const start = async () => {
     console.log(error);
   }
 }
-
-module.exports = start;
+start();
